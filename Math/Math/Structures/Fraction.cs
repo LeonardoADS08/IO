@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Numerics;
+
 
 
 
@@ -10,7 +10,7 @@ namespace Math.Structures
     #pragma warning disable CS0660 
     #pragma warning disable CS0661 
 
-    class Fraction
+    public class Fraction
 
     {
         private int _numerator, _denominator;
@@ -126,8 +126,11 @@ namespace Math.Structures
 
         public static Fraction operator / (Fraction first, Fraction second)
         {
-            second.Invert();
-            return first * second;
+            Fraction res = new Fraction();
+            res.Numerator = first.Numerator * second.Denominator;
+            res.Denominator = first.Denominator * second.Numerator;
+            res.Simplify();
+            return res;
         }
 
         public static Fraction operator / (Fraction first, int second)
@@ -170,15 +173,9 @@ namespace Math.Structures
 
         public static bool operator <= (int first, Fraction second) => !(first >= second);
 
-        public static implicit operator double(Fraction val)
-        {
-            return val.ToDouble();
-        }
+        public static implicit operator double(Fraction val) => val.ToDouble();
         
-        public static implicit operator Fraction(int val)
-        {
-            return new Fraction(val);
-        }
+        public static implicit operator Fraction(int val) => new Fraction(val);
 
         public double ToDouble() => (double)_numerator / (double)_denominator;
 
@@ -186,6 +183,7 @@ namespace Math.Structures
         {
             _numerator = NumberOperation.Pow(_numerator, exponent);
             _denominator = NumberOperation.Pow(_denominator, exponent);
+            this.Simplify();
         }
 
     }

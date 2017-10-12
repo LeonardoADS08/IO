@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Math
 {
-    static class NumberOperation
+    public static class NumberOperation
     {
         public static int GCD(int a, int b)
         {
