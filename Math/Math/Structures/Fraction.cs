@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Linq;
 
 
 
@@ -15,8 +15,10 @@ namespace Math.Structures
     {
         private int _numerator, _denominator;
 
-        public int Numerator { get => _numerator; set => _numerator = value; }
-        public int Denominator { get => _denominator; set => _denominator = value; }
+        
+        public int Denominator { get { return _denominator; } set { _denominator = value; } }
+        public int Numerator
+        {get{return _numerator;}set{_numerator = value;}}
 
         public Fraction()
         {
