@@ -7,9 +7,9 @@ namespace Math.Structures
         private int _rows, _columns;
         private Fraction[,] _data;
 
-        public int Columns { get => _columns; set => _columns = value; }
-        public int Rows { get => _rows; set => _rows = value; }
-        public Fraction[,] Data { get => _data; set => _data = value; }
+        public int Columns { get {return _columns; } set { _columns = value; } }
+        public int Rows { get {return  _rows; } set { _rows = value; } }
+        public Fraction[,] Data { get { return _data; } set { _data = value; } }
 
         public Matrix()
         {
