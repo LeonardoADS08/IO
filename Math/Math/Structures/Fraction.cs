@@ -33,6 +33,14 @@ namespace Math.Structures
             this.Simplify();
         }   
 
+        public Fraction(string val)
+        {
+            Fraction res = Fraction.FromString(val);
+            _numerator = res.Numerator;
+            _denominator = res.Denominator;
+
+        }
+
         public void Simplify()
         {
             int gcd = NumberOperation.GCD(_numerator, _denominator);
@@ -84,7 +92,7 @@ namespace Math.Structures
         {
             first.Simplify();
             second.Simplify();
-
+            
             second.Numerator *= -1;
 
             return first + second;
@@ -180,6 +188,17 @@ namespace Math.Structures
         public static implicit operator Fraction(int val) => new Fraction(val);
 
         public double ToDouble() => (double)_numerator / (double)_denominator;
+
+        public static Fraction FromString(string val)
+        {
+            Fraction res = new Fraction();
+            string[] sep = val.Split('.');
+            res.Numerator = Convert.ToInt32(sep[0]) * (int)System.Math.Pow(10, sep[1].Length);
+            res.Denominator = (int)System.Math.Pow(10, sep[1].Length);
+            res.Simplify();
+
+            return res;
+        }
 
         public void Pow(int exponent)
         {

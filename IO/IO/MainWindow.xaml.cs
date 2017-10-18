@@ -23,6 +23,13 @@ namespace IO
         public MainWindow()
         {
             InitializeComponent();
+
+            F_Imagen.Content = new Frames.Inicio();
+        }
+
+        private void B_Inicio_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
