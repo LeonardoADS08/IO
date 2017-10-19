@@ -17,6 +17,6 @@ namespace Math.Constants
 
     public enum Errors
     {
-
+        //esto para que es?
     };
 }
