@@ -7,7 +7,7 @@ using Math.Constants;
 
 namespace Math.Structures
 {
-    class LinearEquation
+    public class LinearEquation
     {
         List<Fraction> _firstTerms;
         Fraction _secondTerms;
