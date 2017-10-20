@@ -7,21 +7,23 @@ using Math.Constants;
 
 namespace Math.Structures
 {
-    class LinearEquation
+    public class LinearEquation
     {
-        List<Fraction> _terms;
-        Fraction _b;
+        List<Fraction> _firstTerms;
+        Fraction _secondTerms;
         Constants.Signs _sign;
 
-        public List<Fraction> Terms { get { return _terms; } set { _terms = value; } }
-        public Fraction B { get { return _b; } set { _b = value; } }
+        public List<Fraction> FirstTerms { get { return _firstTerms; } set { _firstTerms = value; } }
+        public Fraction SecondTerm { get { return _secondTerms; } set { _secondTerms = value; } }
         public Signs Sign { get { return _sign; } set { _sign = value; } }
 
         public LinearEquation()
         {
-            _terms = new List<Fraction>();
-            _b = new Fraction();
+            _firstTerms = new List<Fraction>();
+            _secondTerms = new Fraction();
             _sign = Signs.Equal;
         }
+
+
     }
 }

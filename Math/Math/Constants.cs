@@ -15,8 +15,11 @@ namespace Math.Constants
         LessEqual = 5
     };
 
-    public enum Errors
+    public static class Errors
     {
-        //esto para que es?
-    };
+
+        public static string ExceptionIn = "Excepción en: ";
+        public static string DivideByZero = "Error #1: La división entre cero no esta permitida.";
+
+    }
 }

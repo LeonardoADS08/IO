@@ -15,10 +15,8 @@ namespace Math.Structures
     {
         private int _numerator, _denominator;
 
-        
-        public int Denominator { get { return _denominator; } set { _denominator = value; } }
-        public int Numerator
-        {get{return _numerator;}set{_numerator = value;}}
+        public int Numerator { get => _numerator; set => _numerator = value; }
+        public int Denominator { get => _denominator; set => _denominator = value; }
 
         public Fraction()
         {
@@ -28,6 +26,8 @@ namespace Math.Structures
 
         public Fraction(int numerator, int denominator = 1)
         {
+            if (denominator == 0) throw new System.Exception(Constants.Errors.DivideByZero);
+
             _numerator = numerator;
             _denominator = denominator;
             this.Simplify();
@@ -43,11 +43,16 @@ namespace Math.Structures
 
         public void Simplify()
         {
-            int gcd = NumberOperation.GCD(_numerator, _denominator);
+            int gcd = NumberOperation.GCD(System.Math.Abs(_numerator), System.Math.Abs(_denominator));
             _numerator /= gcd;
             _denominator /= gcd;
 
-            if (_denominator < 0)
+            if (_numerator < 0 && _denominator < 0)
+            {
+                _numerator *= -1;
+                _denominator *= -1;
+            }
+            else if (_numerator > 0 && _denominator < 0)
             {
                 _numerator *= -1;
                 _denominator *= -1;
