@@ -11,7 +11,6 @@
             <Button x:Name="B_Inicio"  Width="220" Height="40" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Inicio" FontSize="22" Background="#FF39BF72" BorderBrush="{x:Null}" Foreground="#FF34495E" Click="B_Inicio_Click" ></Button>
             <Button x:Name="B_Grafico"  Width="220" Height="40" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Grafico" FontSize="22" Background="#FF39BF72" BorderBrush="{x:Null}" Foreground="#FF34495E" Margin="219,0,0,0" ></Button>
             <Button x:Name="B_Simplex"  Width="220" Height="40" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Simplex" FontSize="22" Background="#FF39BF72" BorderBrush="{x:Null}" Foreground="#FF34495E" Margin="438,0,0,0" ></Button>
-            <Button x:Name="b:V"  Width="220" Height="40" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content=":v" FontSize="22" Background="#FF39BF72" BorderBrush="{x:Null}" Foreground="#FF34495E" Margin="663,0,0,0" ></Button>
         </Grid>
         <Frame x:Name="F_Imagen" Margin="0,120,0,0"></Frame>
     </Grid>

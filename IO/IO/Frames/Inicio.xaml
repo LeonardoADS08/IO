@@ -8,8 +8,5 @@
       d:DesignHeight="600" d:DesignWidth="1280" Background="#ecf0f1"
       Title="Inicio">
 
-    <Grid>
-        <Label Content="Amamos a Peggi :)" HorizontalAlignment="Left" Margin="383,171,0,0" VerticalAlignment="Top" FontSize="48"/>
-
-    </Grid>
+    <Grid/>
 </Page>
