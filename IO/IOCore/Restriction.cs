@@ -53,7 +53,7 @@ namespace IOCore
             else if(_resEquation.Sign == Math.Constants.Signs.Less)
                 return (_sol < _resEquation.SecondTerm);
             else return (_sol == _resEquation.SecondTerm);
-            
+            //como es que esto cae en mas leible
         }
 
         public Fraction Term(int _pos)
