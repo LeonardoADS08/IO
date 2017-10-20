@@ -10,8 +10,8 @@ namespace IOCore
     {
         public enum Objetive
         {
-            Maximize=1,
-            Minimize=0
+            Maximize = 1,
+            Minimize = 0
 
         }
         public enum Errors

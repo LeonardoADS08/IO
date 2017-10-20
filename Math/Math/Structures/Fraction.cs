@@ -43,11 +43,16 @@ namespace Math.Structures
 
         public void Simplify()
         {
-            int gcd = NumberOperation.GCD(_numerator, _denominator);
+            int gcd = NumberOperation.GCD(System.Math.Abs(_numerator), System.Math.Abs(_denominator));
             _numerator /= gcd;
             _denominator /= gcd;
 
-            if (_denominator < 0)
+            if (_numerator < 0 && _denominator < 0)
+            {
+                _numerator *= -1;
+                _denominator *= -1;
+            }
+            else if (_numerator > 0 && _denominator < 0)
             {
                 _numerator *= -1;
                 _denominator *= -1;
