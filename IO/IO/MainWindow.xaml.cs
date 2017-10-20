@@ -20,16 +20,33 @@ namespace IO
     /// </summary>
     public partial class MainWindow : Window
     {
+        // Se instancian las ventanas como propiedades de la ventana para cachearlas y no perder los dato al cambiar entre ventana
+        // Estas ventanas solo van a instanciarse al haber abierto por lo menos una vez la vista.
+        Frames.Inicio F_Inicio;
+        Frames.Simplex F_Simplex;
+        Frames.Grafico F_Grafico;
+
         public MainWindow()
         {
             InitializeComponent();
+        }
 
-            F_Imagen.Content = new Frames.Inicio();
+        private void B_Simplex_Click(object sender, RoutedEventArgs e)
+        {
+            if (F_Simplex == null) F_Simplex = new Frames.Simplex();
+            F_Vista.Content = F_Simplex;
         }
 
         private void B_Inicio_Click(object sender, RoutedEventArgs e)
         {
+            if (F_Simplex == null) F_Inicio = new Frames.Inicio();
+            F_Vista.Content = F_Inicio;
+        }
 
+        private void B_Grafico_Click(object sender, RoutedEventArgs e)
+        {
+            if (F_Simplex == null) F_Grafico = new Frames.Grafico();
+            F_Vista.Content = F_Grafico;
         }
     }
 }
