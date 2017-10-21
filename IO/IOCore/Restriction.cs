@@ -11,9 +11,11 @@ namespace IOCore
     public class Restriction
     {
         private int ES_Sing;
+        private Fraction _es_Variant;
         private Math.Structures.LinearEquation _resEquation;
 
         public LinearEquation ResEquation { get => _resEquation; set => _resEquation = value; }
+        public Fraction Es_Variant { get => _es_Variant; set => _es_Variant = value; }//posiblemente si lo terminemos usando
 
         public Fraction ExcendentOrSlackValue(List<Fraction> _variants)
         {
