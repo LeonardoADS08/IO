@@ -13,9 +13,16 @@ namespace IOCore
         private Math.Structures.LinearEquation _artificialEcu;
 
         public LinearEquation ArtificialEcu { get => _artificialEcu; set => _artificialEcu = value; }
-        //public ArtificialFunction(Restriction _res)
-        //{
+      public ArtificialFunction()
+        {
+            _artificialEcu = new LinearEquation();
+        }
 
-        //}
+        public LinearEquation ArtificialCreation(Restriction _res)
+        {
+            //pensar mejor
+            return null;
+        }
+
     }
 }
