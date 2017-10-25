@@ -14,12 +14,4 @@ namespace Math.Constants
         Less = 4,
         LessEqual = 5
     };
-
-    public static class Errors
-    {
-
-        public static string ExceptionIn = "Excepción en: ";
-        public static string DivideByZero = "Error #1: La división entre cero no esta permitida.";
-
-    }
 }

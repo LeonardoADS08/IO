@@ -10,6 +10,13 @@ namespace Math.Structures
     #pragma warning disable CS0660 
     #pragma warning disable CS0661 
 
+    /*
+     Errores:
+        El error más común que puede suceder en Fraction será que en algún momento haya denominador en 0.
+            - Este error solo se valida en la creación del objeto (En el segundo constructor) y en Simplify() dado que esta función se llama en practicamente todas las sobrecargas.
+         
+    */
+
     public class Fraction
 
     {
@@ -26,7 +33,7 @@ namespace Math.Structures
 
         public Fraction(int numerator, int denominator = 1)
         {
-            if (denominator == 0) throw new System.Exception(Constants.Errors.DivideByZero);
+            if (_denominator == 0) throw new System.Exception(Utils.ErrorList.NotDivisbleByZero);
 
             _numerator = numerator;
             _denominator = denominator;
@@ -43,6 +50,8 @@ namespace Math.Structures
 
         public void Simplify()
         {
+            if (_denominator == 0) throw new System.Exception(Utils.ErrorList.NotDivisbleByZero);
+
             int gcd = NumberOperation.GCD(System.Math.Abs(_numerator), System.Math.Abs(_denominator));
             _numerator /= gcd;
             _denominator /= gcd;
