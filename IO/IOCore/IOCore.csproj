@@ -48,11 +48,5 @@
     <Compile Include="Restriction.cs" />
     <Compile Include="Simplex.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Math\Math\Math.csproj">
-      <Project>{a98404c9-fcbc-46d6-be30-68bf701f1096}</Project>
-      <Name>Math</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
