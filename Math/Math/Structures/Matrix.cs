@@ -26,77 +26,107 @@ namespace Math.Structures
 
         public void Transpose()
         {
-            Matrix result = new Matrix(_columns, _rows);
-            for (int i = 0; i < _rows; ++i)
+            
+            try
             {
-                for (int j = 0; j < _columns; ++j)
+                Matrix result = new Matrix(_columns, _rows);
+                for (int i = 0; i < _rows; ++i)
                 {
-                    result.Data[j, i] = _data[i, j];
+                    for (int j = 0; j < _columns; ++j)
+                    {
+                        result.Data[j, i] = _data[i, j];
+                    }
                 }
+                _columns = result.Columns;
+                _rows = result.Rows;
+                _data = result.Data;
             }
-            _columns = result.Columns;
-            _rows = result.Rows;
-            _data = result.Data;
+            catch (Exception ex)
+            {
+                Utils.RuntimeLogs.SendLog(Utils.ErrorList.Unknown + " Exception: " + ex.Message, "Matrix.Transpose()");
+            }
+            
         }
 
         public bool SquareMatrix() => _columns == _rows;
 
         public Matrix Identity()
         {
-            if (!SquareMatrix()) return null;
+            try
+            {
+                if (!SquareMatrix()) throw new Exception(Utils.ErrorList.NotSquareMatrix);
 
-            Matrix result = new Matrix(_rows, _columns);
-            for (int i = 0; i < _rows; ++i)
-                for (int j = 0; j < _columns; ++j)
-                {
-                    if (i == j) result.Data[i, j] = 1;
-                    else result.Data[i, j] = 0;
-                }
-            return result;
+                Matrix result = new Matrix(_rows, _columns);
+                for (int i = 0; i < _rows; ++i)
+                    for (int j = 0; j < _columns; ++j)
+                    {
+                        if (i == j) result.Data[i, j] = 1;
+                        else result.Data[i, j] = 0;
+                    }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Utils.RuntimeLogs.SendLog(ex.Message, "Matrix.Identity()");
+                return null;
+            }
+            
         }
 
         public Matrix Invert()
         {
-            Matrix result = Identity();
-            Fraction pivot, aux;
-
-            // Se recorrera toda la diagonal, que es igual a la cantidad de filas o columnas
-            for (int k = 0; k < _rows; ++k)
+            try
             {
+                if (!SquareMatrix()) throw new Exception(Utils.ErrorList.NotSquareMatrix);
 
-                // Se guarda temporalmente el pivote
-                pivot = _data[k, k];
-                pivot.Simplify();
+                Matrix result = Identity();
+                Fraction pivot, aux;
 
-                if (pivot.Numerator == 0) return null; // Si el pivote es 0 no es invertible
-                else if (pivot.Numerator != 1 || pivot.Denominator != 1) // Si el pivote no es igual a la unidad, se lo convierte a la unidad
+                // Se recorrera toda la diagonal, que es igual a la cantidad de filas o columnas
+                for (int k = 0; k < _rows; ++k)
                 {
-                    for (int i = 0; i < _columns; ++i)
-                    {
-                        _data[k, i] = _data[k, i] / pivot;
-                        result.Data[k, i] = result.Data[k, i] / pivot;
-                    }
-                }
 
-                // Se cera las filas de abajo del pivote
-                for (int i = 0; i < _rows; ++i)
-                {
-                    // Si el elemento de la fila ya esta cerado ó es el pivote, se pasa al siguiente.
-                    if (_data[i, k].Numerator == 0 || i == k) continue;
+                    // Se guarda temporalmente el pivote
+                    pivot = _data[k, k];
+                    pivot.Simplify();
 
-                    // Se toma el elemento que debe convertirse en cero.
-                    aux = _data[i, k];
-                    for (int j = 0; j < _columns; ++j)
+                    if (pivot.Numerator == 0) return null; // Si el pivote es 0 no es invertible
+                    else if (pivot.Numerator != 1 || pivot.Denominator != 1) // Si el pivote no es igual a la unidad, se lo convierte a la unidad
                     {
-                        _data[i, j] = _data[i, j] - aux * _data[k, j];
-                        result.Data[i, j] = result.Data[i, j] - aux * result.Data[k, j];
+                        for (int i = 0; i < _columns; ++i)
+                        {
+                            _data[k, i] = _data[k, i] / pivot;
+                            result.Data[k, i] = result.Data[k, i] / pivot;
+                        }
                     }
+
+                    // Se cera las filas de abajo del pivote
+                    for (int i = 0; i < _rows; ++i)
+                    {
+                        // Si el elemento de la fila ya esta cerado ó es el pivote, se pasa al siguiente.
+                        if (_data[i, k].Numerator == 0 || i == k) continue;
+
+                        // Se toma el elemento que debe convertirse en cero.
+                        aux = _data[i, k];
+                        for (int j = 0; j < _columns; ++j)
+                        {
+                            _data[i, j] = _data[i, j] - aux * _data[k, j];
+                            result.Data[i, j] = result.Data[i, j] - aux * result.Data[k, j];
+                        }
+                    }
+
                 }
-                
+                return result;
             }
-            return result;
+            catch (Exception ex)
+            {
+                Utils.RuntimeLogs.SendLog(ex.Message, "Matrix.Invert()");
+                return null;
+            }
+            
         }
 
+        // Prescindible, solo para testeo.
         public void showMatrix()
         {
             for (int i = 0; i < _rows; ++i)

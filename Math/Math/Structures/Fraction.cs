@@ -50,7 +50,7 @@ namespace Math.Structures
 
         public void Simplify()
         {
-            if (_denominator == 0) throw new System.Exception(Utils.ErrorList.NotDivisbleByZero);
+            if (_denominator == 0) throw new Exception(Utils.ErrorList.NotDivisbleByZero);
 
             int gcd = NumberOperation.GCD(System.Math.Abs(_numerator), System.Math.Abs(_denominator));
             _numerator /= gcd;

@@ -2,14 +2,14 @@
 using System.IO;
 using System.Threading;
 
-namespace SDA_Core.Functional
+namespace Utils
 {
     /// <summary>
     /// ES: Una clase que almacena registros en tiempo de ejecución, enfocado para guardar mensajes de excepciones u otros errores,
     ///     para que sea posteriormente analizado y sea más fácil encontrar errores.
     ///     Este proceso se ejecuta en otro hilo.
     /// </summary>
-    internal static class RuntimeLogs
+    public static class RuntimeLogs
     {
         private static void WriteLine(string message, string direction, bool enumerate = true)
         {

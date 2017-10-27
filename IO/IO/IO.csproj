@@ -63,7 +63,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Frames\Simplex.xaml">
+    <Page Include="Frames\Simplex\Inicio.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -81,8 +81,8 @@
     <Compile Include="Frames\Inicio.xaml.cs">
       <DependentUpon>Inicio.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Frames\Simplex.xaml.cs">
-      <DependentUpon>Simplex.xaml</DependentUpon>
+    <Compile Include="Frames\Simplex\Inicio.xaml.cs">
+      <DependentUpon>Inicio.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
