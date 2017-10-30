@@ -11,11 +11,11 @@
     <Grid>
         <GroupBox x:Name="GB_CondicionesIniciales" Header="Condiciones iniciales" FontSize="16" Margin="10,10,10,10" d:IsLocked="True">
         </GroupBox>
-        <Label x:Name="L_Variables" Content="Cantidad de variables" VerticalAlignment="Top" Margin="515,297,515,0" VerticalContentAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Width="250"/>
-        <TextBox x:Name="TB_Variables" Width="250" Margin="515,323,515,0" VerticalContentAlignment="Center" HorizontalAlignment="Center" Height="18" VerticalAlignment="Top"/>
-        <Label x:Name="L_Restricciones" Content="Cantidad de restricciones" VerticalAlignment="Top" Margin="515,355,515,0" VerticalContentAlignment="Center" HorizontalAlignment="Center" Width="250" HorizontalContentAlignment="Center"/>
-        <TextBox x:Name="TB_Restricciones" VerticalAlignment="Top" Width="250" Margin="515,381,515,0" VerticalContentAlignment="Center" HorizontalAlignment="Center"/>
-        <Label x:Name="L_Titulo" Content="Condiciones del problema" VerticalAlignment="Top" Margin="515,238,515,0" FontSize="18" Width="250" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center"/>
-        <Button x:Name="B_Aceptar" Content="Aceptar" HorizontalAlignment="Center" Margin="515,409,515,0" VerticalAlignment="Top" Width="250"/>
+        <Label x:Name="L_Variables" Content="Cantidad de variables" VerticalAlignment="Top" Margin="515,297,515,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <TextBox x:Name="TB_Variables" Margin="545,323,545,0" VerticalContentAlignment="Center" Height="18" VerticalAlignment="Top"/>
+        <Label x:Name="L_Restricciones" Content="Cantidad de restricciones" VerticalAlignment="Top" Margin="515,355,515,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <TextBox x:Name="TB_Restricciones" VerticalAlignment="Top" Margin="545,381,545,0" VerticalContentAlignment="Center"/>
+        <Label x:Name="L_Titulo" Content="Condiciones del problema" VerticalAlignment="Top" Margin="515,238,515,0" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Button x:Name="B_Aceptar" Content="Aceptar" Margin="545,409,545,0" VerticalAlignment="Top" Click="B_Aceptar_Click"/>
     </Grid>
 </Page>

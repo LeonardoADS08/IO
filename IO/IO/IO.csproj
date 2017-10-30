@@ -118,5 +118,11 @@
   <ItemGroup>
     <Resource Include="Cubo.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{c9d16dc6-e9ac-43c3-a95e-61a9a86db3dc}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
