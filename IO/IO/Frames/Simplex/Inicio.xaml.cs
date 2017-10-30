@@ -24,5 +24,17 @@ namespace IO.Frames
         {
             InitializeComponent();
         }
+
+        private void B_Aceptar_Click(object sender, RoutedEventArgs e)
+        {
+            int restricciones, variables;
+            if (Int32.TryParse(TB_Restricciones.Text, out restricciones) &&
+                Int32.TryParse(TB_Restricciones.Text, out variables))
+            {
+
+            }
+            else MessageBox.Show(Utils.ErrorList.CantConvertToInt32, "Error en conversión.", MessageBoxButton.OK, MessageBoxImage.Error);
+
+        }
     }
 }
