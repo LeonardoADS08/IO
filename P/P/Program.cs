@@ -53,7 +53,8 @@ namespace P
                 solver.GetValue(jetfuel).ToDouble(),
                 solver.GetValue(machinelubricant).ToDouble(),
                 solver.GetValue(cost).ToDouble());//string por parametro
-            Console.ReadKey();
+            
+Console.ReadKey();
 
         }
     }
