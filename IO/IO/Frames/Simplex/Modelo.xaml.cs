@@ -23,7 +23,6 @@ namespace IO.Frames.Simplex
         public Modelo(int restricciones, int variables)
         {
             InitializeComponent();
-            Texto.Content = "La cantidad de restricciones es: " + restricciones.ToString() + " , tiene " + variables.ToString() + " variables";
 
         }
     }
