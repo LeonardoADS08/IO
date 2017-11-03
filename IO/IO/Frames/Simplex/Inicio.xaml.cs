@@ -13,25 +13,40 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace IO.Frames
+namespace IO.Frames.Simplex
 {
     /// <summary>
-    /// Lógica de interacción para Simplex.xaml
+    /// Lógica de interacción para Inicio.xaml
     /// </summary>
-    public partial class Simplex : Page
+    public partial class Inicio : Window
     {
-        public Simplex()
+        
+        private bool estado;
+        private int restricciones, variables;
+
+        public bool Estado { get => estado; set => estado = value; }
+        public int Restricciones { get => restricciones; set => restricciones = value; }
+        public int Variables { get => variables; set => variables = value; }
+
+        public Inicio()
         {
             InitializeComponent();
+            estado = false;
+        }
+
+        private void B_Cancelar_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
 
         private void B_Aceptar_Click(object sender, RoutedEventArgs e)
         {
-            int restricciones, variables;
+            
             if (Int32.TryParse(TB_Restricciones.Text, out restricciones) &&
-                Int32.TryParse(TB_Restricciones.Text, out variables))
+                Int32.TryParse(TB_Variables.Text, out variables))
             {
-
+                estado = true;
+                this.Close();
             }
             else MessageBox.Show(Utils.ErrorList.CantConvertToInt32, "Error en conversión.", MessageBoxButton.OK, MessageBoxImage.Error);
 

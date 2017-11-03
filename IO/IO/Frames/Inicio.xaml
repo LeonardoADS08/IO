@@ -8,5 +8,9 @@
       d:DesignHeight="600" d:DesignWidth="1280" Background="#ecf0f1"
       Title="Inicio">
 
-    <Grid/>
+    <Grid>
+        <Label Content="IO Solver" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="48" FontStyle="Italic" Margin="57,49,0,0"/>
+        <Label Content="Powered by Microsoft Solver Foundation 3.1" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10" FontStyle="Italic" Margin="104,107,0,0"/>
+
+    </Grid>
 </Page>
