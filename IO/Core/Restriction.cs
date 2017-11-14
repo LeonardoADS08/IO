@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core
 {
-    class Restriction
+    public class Restriction
     {
         private double _bside;
         List<double> _coef;

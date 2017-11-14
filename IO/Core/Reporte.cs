@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core
 {
-    class Reporte
+    public class Reporte
     {
 
     }

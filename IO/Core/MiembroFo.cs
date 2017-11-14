@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core
 {
-    class MiembroFo
+    public class MiembroFo
     {
         private string _name;
         private double _coef;

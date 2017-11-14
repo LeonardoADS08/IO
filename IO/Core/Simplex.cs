@@ -9,7 +9,7 @@ using Microsoft.SolverFoundation.Solvers;
 
 namespace Core
 {
-    class Simplex
+    public class Simplex
     {
         private int _z;
 
