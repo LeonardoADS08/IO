@@ -12,14 +12,20 @@ namespace Core
     class Simplex
     {
 
-        private Dictionary<string, double> _var;
-        private Dictionary<string,double>_restriction;
-        public Simplex(Dictionary<string, double> vars, Dictionary<string, double> restriction)
+        private List<Simplex> _fo;
+        
+        public List<Simplex> FO { get => _fo; set => _fo = value; }
+        internal List<Restriction> Res { get => _res; set => _res = value; }
+
+        private List<Restriction> _res;
+        Simplex(List<Simplex>x)
         {
-            _var = vars;
-            _restriction = restriction;
+            FO = x;
         }
 
-
+        void AddRestriction(Restriction x)
+        {
+            Res.Add(x);
+        }
     }
 }
