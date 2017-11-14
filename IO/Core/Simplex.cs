@@ -41,7 +41,10 @@ namespace Core
             for (int i = 0; i < Res.Count; i++)
             {
                 Solver.AddRow(Res[i].Name, out Res[i]._value);
-                for(int j=0;j)
+                for (int j = 0; j < Res[i].Coef.Count; j++)
+                {
+                    Solver.SetCoefficient()
+                }
             }
         }
 
