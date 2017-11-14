@@ -10,10 +10,16 @@ namespace Core
     {
         private string _name;
         private double _coef;
+       public int _value;
 
         public string Name { get => _name; set => _name = value; }
         public double Coef { get => _coef; set => _coef = value; }
-        
 
+        MiembroFo()
+        {
+            _value = 0;
+            _coef = 1;
+        }
+    
     }
 }

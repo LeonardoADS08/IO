@@ -12,20 +12,38 @@ namespace Core
     class Simplex
     {
 
-        private List<Simplex> _fo;
+        private List<MiembroFo> _fo;
         
-        public List<Simplex> FO { get => _fo; set => _fo = value; }
+        public List<MiembroFo> FO { get => _fo; set => _fo = value; }
         internal List<Restriction> Res { get => _res; set => _res = value; }
+        public SimplexSolver Solver { get => _solver; set => _solver = value; }
 
+        private SimplexSolver _solver;
         private List<Restriction> _res;
-        Simplex(List<Simplex>x)
+        Simplex(List<MiembroFo>x)
         {
+            int i;
             FO = x;
+            Solver=new SimplexSolver();
+
+            for (i = 0; i < FO.Count; i++)
+            {
+                Solver.AddVariable(FO[i].Name, out FO[i]._value);//asigna donde se guardaran los resultados;
+                Solver.SetBounds(FO[i]._value, 0, Rational.PositiveInfinity);
+            }
+
+
         }
 
         void AddRestriction(Restriction x)
         {
             Res.Add(x);
+            for (int i = 0; i < Res.Count; i++)
+            {
+             Solver.AddRow(Res[i].Name,out)   
+            }
         }
+
+
     }
 }
