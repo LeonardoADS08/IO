@@ -1,0 +1,11 @@
+Restriccion:
+	Nombre de la restricción
+	Signo
+	Lado b
+	LIst<double>Coeficientes
+Restricciones: List<Restriccion>
+
+Miembro FO
+	Nombre de las variables
+	Coeficientes
+FO: List<MiembroFO>
