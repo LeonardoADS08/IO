@@ -50,12 +50,17 @@ namespace IO
 
         private void CargarSimplex(object sender, EventArgs e)
         {
-            if (!F_Simplex_Inicio.Estado) return;
+            if (!F_Simplex_Inicio.Estado)
+            {
+                F_Simplex_Inicio = null;
+                return;
+            }
 
             if (F_Simplex_Modelo == null)
             {
                 F_Simplex_Modelo = new Frames.Simplex.Modelo(F_Simplex_Inicio.Restricciones, F_Simplex_Inicio.Variables);
                 F_Vista.Content = F_Simplex_Modelo;
+                F_Simplex_Inicio = null;
                 return;
             }
             if (F_Simplex_Inicio.Estado)
@@ -68,15 +73,21 @@ namespace IO
                 if (result == MessageBoxResult.Yes)
                 {
                     F_Vista.Content = F_Simplex_Modelo;
+                    F_Simplex_Inicio = null;
                     return;
                 }
                 else if (result == MessageBoxResult.No)
                 {
                     F_Simplex_Modelo = new Frames.Simplex.Modelo(F_Simplex_Inicio.Restricciones, F_Simplex_Inicio.Variables);
                     F_Vista.Content = F_Simplex_Modelo;
+                    F_Simplex_Inicio = null;
                     return;
                 }
-                else return;
+                else
+                {
+                    F_Simplex_Inicio = null;
+                    return;
+                }
             }
             
             
