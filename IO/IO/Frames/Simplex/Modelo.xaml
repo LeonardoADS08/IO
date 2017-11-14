@@ -9,6 +9,8 @@
       Title="Modelo">
 
     <Grid>
-        <GroupBox Header="GroupBox" HorizontalAlignment="Left" Margin="15,15,15,15" Width="475"/>
+        <GroupBox Header="Modelo" HorizontalAlignment="Left" Margin="15,15,15,15" Width="475">
+            <DataGrid x:Name="DG_FO" HorizontalAlignment="Left" Height="135" Margin="10,10,0,0" VerticalAlignment="Top" Width="446"/>
+        </GroupBox>
     </Grid>
 </Page>
