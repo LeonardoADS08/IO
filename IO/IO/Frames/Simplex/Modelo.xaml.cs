@@ -24,6 +24,28 @@ namespace IO.Frames.Simplex
         {
             InitializeComponent();
 
+            DataGridTextColumn Variable = new DataGridTextColumn();
+            Variable.Header = "Variable";
+            Variable.Width = 30;
+            Variable.IsReadOnly = true;
+            DG_FO.Columns.Add(Variable);
+
+            DataGridTextColumn Nombre = new DataGridTextColumn();
+            Nombre.Header = "Nombre de la variable";
+            Nombre.Binding = new Binding("Nombre");
+            Nombre.Width = 350;
+            DG_FO.Columns.Add(Nombre);
+
+            DataGridTextColumn Coeficiente = new DataGridTextColumn();
+            Coeficiente.Header = "Coeficiente";
+            Coeficiente.Binding = new Binding("Coeficiente");
+            Coeficiente.Width = 225;
+            DG_FO.Columns.Add(Coeficiente);
+
+            for (int i = 0; i < variables; ++i)
+            {
+
+            }
         }
     }
 }
