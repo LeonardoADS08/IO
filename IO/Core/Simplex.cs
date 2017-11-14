@@ -40,7 +40,8 @@ namespace Core
             Res.Add(x);
             for (int i = 0; i < Res.Count; i++)
             {
-             Solver.AddRow(Res[i].Name,out)   
+                Solver.AddRow(Res[i].Name, out Res[i]._value);
+                for(int j=0;j)
             }
         }
 
