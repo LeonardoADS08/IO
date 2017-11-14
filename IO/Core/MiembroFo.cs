@@ -15,7 +15,7 @@ namespace Core
         public string Name { get => _name; set => _name = value; }
         public double Coef { get => _coef; set => _coef = value; }
 
-        MiembroFo()
+        public MiembroFo()
         {
             _value = 0;
             _coef = 1;

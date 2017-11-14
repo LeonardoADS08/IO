@@ -23,5 +23,10 @@ namespace Core
         }
 
         public Signo _sign;
+
+        public Restriction()
+        {
+            Coef = new List<double>();
+        }
     }
 }
