@@ -8,7 +8,7 @@ using Microsoft.SolverFoundation.Common;
 using Microsoft.SolverFoundation.Solvers;
 namespace SolverFtest
 {
-    class Program
+    class LeMain
     {
         public static List<MiembroFo> LLenarLista()
         {
