@@ -66,8 +66,28 @@ namespace SolverFtest
 
                 aux.Coef.Add(yus);
             }
-            Console.WriteLine("ingrese el signo");
-            aux._sign = Signo.MayorIgualQue;
+            Console.WriteLine("ingrese el signo  1 =(mayor igual) ,2=(menor igual) ,3=(mayor que), 4=(menor que),5=(igual)");
+            int op = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
+            if (op == 1)
+            {
+                aux._sign = Signo.MayorIgualQue;
+            }
+            else if (op == 2)
+            {
+                aux._sign = Signo.MenorIgualQue;
+            }
+            else if (op == 3)
+            {
+                aux._sign = Signo.MayorQue;
+            }
+            else if (op == 4)
+            {
+                aux._sign = Signo.MenorQue;
+            }
+            else if (op == 5)
+            {
+                aux._sign = Signo.Igual;
+            }
             Console.WriteLine("ingrese el lado B");
             aux.Bside= double.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
             return aux;
@@ -109,18 +129,17 @@ namespace SolverFtest
 
             MostrarFo(x);
             Restriction y = new Restriction();
-
-            Simplex aurus = new Simplex(x, true);
+            Console.WriteLine("maximizar =0 ; minimzar = 1");
+            int up = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
+            Simplex aurus = new Simplex(x, up);
 
             aurus.AddRestriction(LlenarListaderestricciones(x.Count));
             aurus.Solver.Solve(new SimplexSolverParams());
             Console.WriteLine(aurus.Solver.GetValue(aurus._z).ToDouble());
 
             Console.WriteLine(aurus.Solver.FactorCount+1);//CUANTAS iteraciones matriciales se realizo
+           
 
-            aurus.Solver.GetReport(new LinearSolverReportType());
-
-            
 
             Console.ReadKey();
         }
