@@ -1,0 +1,18 @@
+
+MiembroFO
+{
+nombre<-string
+coef<-double
+valor<-int  ESTO NO ME LO TIENES QUE DAR
+}
+
+
+constructor de simplex(List<miembroFO>,BOOL)-----
+Restriccion()
+{
+ladoB<-double
+coefs<-list<double>
+nombre<-string
+value<- int(este es el resultado del lado a de la ecuacion a=b)	ESTO NO ME LO TIENES QUE DAR
+}
+addrestriction(list<Restriccion>)----
