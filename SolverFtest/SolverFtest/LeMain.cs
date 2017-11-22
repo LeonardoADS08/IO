@@ -63,7 +63,7 @@ namespace SolverFtest
             {
                 Console.WriteLine("ingrese el coeficiente");
                 double yus= double.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
-
+                
                 aux.Coef.Add(yus);
             }
             Console.WriteLine("ingrese el signo  1 =(mayor igual) ,2=(menor igual) ,3=(mayor que), 4=(menor que),5=(igual)");
@@ -138,8 +138,21 @@ namespace SolverFtest
             Console.WriteLine(aurus.Solver.GetValue(aurus._z).ToDouble());
 
             Console.WriteLine(aurus.Solver.FactorCount+1);//CUANTAS iteraciones matriciales se realizo
-           
 
+            Reporte _reporte = new Reporte(aurus);
+            int oj = 0;
+            Console.WriteLine("variables");
+            foreach(double ax in _reporte.Report_Variables())
+            {
+                Console.WriteLine("X " + oj + " =" + ax);
+                oj++;
+            }
+            Console.WriteLine("slack or surplus");
+            foreach (double ax in _reporte.Report_Restriction_Variables())
+            {
+                Console.WriteLine("R " + oj + " =" + ax);
+                oj++;
+            }
 
             Console.ReadKey();
         }
