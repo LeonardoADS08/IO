@@ -47,6 +47,8 @@ namespace SolverFtest
         {
             Reporte x = null ;
             Solver.Solve(new SimplexSolverParams());
+
+
             return x;
         }
         public void AddRestriction(List<Restriction> x)//tiene que recibir todas las restricciones ya llenadas
