@@ -92,6 +92,7 @@
     <Compile Include="Frames\Simplex\Modelo.xaml.cs">
       <DependentUpon>Modelo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Frames\Simplex\Signos.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

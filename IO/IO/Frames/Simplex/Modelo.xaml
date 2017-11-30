@@ -13,7 +13,7 @@
         <GroupBox Header="Función objetivo" Height="180" Margin="45,45,45,0" VerticalAlignment="Top"  d:IsLocked="True"/>
         <GroupBox Header="Restricciones" HorizontalAlignment="Left" Height="304" Margin="45,240,0,0" VerticalAlignment="Top" Width="1190" d:IsLocked="True"/>
         
-        <DataGrid x:Name="DG_FO"  Height="114" Margin="65,75,65,0" VerticalAlignment="Top" ItemsSource="{Binding ListFO}" AutoGenerateColumns="False" LoadingRow="DG_FO_LoadingRow" IsSynchronizedWithCurrentItem="True" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserReorderColumns="False" HorizontalGridLinesBrush="#FFD4D4D4" VerticalGridLinesBrush="#FFD4D4D4" >
+        <DataGrid x:Name="DG_FO"  Height="114" Margin="65,75,65,0" VerticalAlignment="Top" ItemsSource="{Binding ListFO}" AutoGenerateColumns="False" LoadingRow="DG_FO_LoadingRow" IsSynchronizedWithCurrentItem="True" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserReorderColumns="False" HorizontalGridLinesBrush="#FFD4D4D4" VerticalGridLinesBrush="#FFD4D4D4" CellEditEnding="DG_FO_CellEditEnding" >
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Nombre de la variable" Binding="{Binding Name}" Width="*"/>
                 <DataGridTextColumn Header="Coeficiente" Binding="{Binding Coef}" Width="*"/>
@@ -22,8 +22,7 @@
         <Button x:Name="B_Reestablecer" Content="Reestablecer" Margin="0,194,65,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="155" Click="B_Reestablecer_Click" />
         <Button x:Name="B_GenerarReporte" Content="Generar reporte" Margin="0,549,65,0" VerticalAlignment="Top" Width="185" Height="19" HorizontalAlignment="Right" />
 
-        <DataGrid x:Name="DG_Rest"  Height="247" Margin="65,265,65,0" VerticalAlignment="Top" ItemsSource="{Binding ListRest}" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserReorderColumns="False" HorizontalGridLinesBrush="#FFD4D4D4" VerticalGridLinesBrush="#FFD4D4D4" LoadingRow="DG_Rest_LoadingRow" >
-        </DataGrid>
-    
+        <DataGrid x:Name="DG_Rest"  Height="247" Margin="65,265,65,0" VerticalAlignment="Top" ItemsSource="{Binding ListRest}" IsSynchronizedWithCurrentItem="True" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserReorderColumns="False" HorizontalGridLinesBrush="#FFD4D4D4" VerticalGridLinesBrush="#FFD4D4D4" LoadingRow="DG_Rest_LoadingRow" AutoGenerateColumns="False" CellEditEnding="DG_Rest_CellEditEnding" > </DataGrid>
+
     </Grid>
 </Page>
