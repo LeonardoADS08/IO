@@ -16,7 +16,7 @@ namespace SolverFtest
         private List<MiembroFo> _fo;
         
         public List<MiembroFo> FO { get => _fo; set => _fo = value; }
-        internal List<Restriction> Res { get => _res; set => _res = value; }
+        public List<Restriction> Res { get => _res; set => _res = value; }
         public SimplexSolver Solver { get => _solver; set => _solver = value; }
         public int Z { get => _z; set => _z = value; }
 
@@ -47,6 +47,8 @@ namespace SolverFtest
         {
             Reporte x = null ;
             Solver.Solve(new SimplexSolverParams());
+
+
             return x;
         }
         public void AddRestriction(List<Restriction> x)//tiene que recibir todas las restricciones ya llenadas

@@ -63,7 +63,7 @@ namespace SolverFtest
             {
                 Console.WriteLine("ingrese el coeficiente");
                 double yus= double.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
-
+                
                 aux.Coef.Add(yus);
             }
             Console.WriteLine("ingrese el signo  1 =(mayor igual) ,2=(menor igual) ,3=(mayor que), 4=(menor que),5=(igual)");
@@ -123,9 +123,9 @@ namespace SolverFtest
         static void Main(string[] args)
         {
 
-            List<MiembroFo> x=new List<MiembroFo>();
+            List<MiembroFo> x = new List<MiembroFo>();
 
-            x=LLenarLista();
+            x = LLenarLista();
 
             MostrarFo(x);
             Restriction y = new Restriction();
@@ -134,12 +134,67 @@ namespace SolverFtest
             Simplex aurus = new Simplex(x, up);
 
             aurus.AddRestriction(LlenarListaderestricciones(x.Count));
-            aurus.Solver.Solve(new SimplexSolverParams());
-            Console.WriteLine(aurus.Solver.GetValue(aurus._z).ToDouble());
+        
+          
 
-            Console.WriteLine(aurus.Solver.FactorCount+1);//CUANTAS iteraciones matriciales se realizo
-           
+            Reporte _reporte = new Reporte(aurus);
+            int oj = 0;
+            Console.WriteLine(_reporte.LeZ());
 
+
+            Console.WriteLine("variables");
+            foreach (double ax in _reporte.Report_Variables())
+            {
+                Console.WriteLine("X " + oj + " =" + ax);
+                oj++;
+            }
+            oj = 0;
+            Console.WriteLine("variables limits lower");
+            foreach (Rational t in _reporte.Report_Variable_Limits(true, 1))
+            {
+                Console.WriteLine("x " + oj + " lower =" + t);
+                oj++;
+            }
+            oj = 0;
+            Console.WriteLine("variables limits upper");
+            foreach (Rational t in _reporte.Report_Variable_Limits(false, 1))
+            {
+                Console.WriteLine("x " + oj + "upper  =" + t);
+                oj++;
+            }
+            oj = 0;
+
+
+
+            Console.WriteLine("slack or surplus");
+            foreach (double ax in _reporte.Report_Restriction_Variables())
+            {
+                Console.WriteLine("R " + oj + " =" + ax);
+                oj++;
+            }
+            oj = 0;
+            Console.WriteLine("constraints limits lower");
+            foreach (Rational t in _reporte.Report_Variable_Limits(true, 2))
+            {
+                Console.WriteLine("x " + oj + " lower =" + t);
+                oj++;
+            }
+            oj = 0;
+            Console.WriteLine("constraints limits upper");
+            foreach (Rational t in _reporte.Report_Variable_Limits(false, 2))
+            {
+                Console.WriteLine("x " + oj + "upper  =" + t);
+                oj++;
+            }
+            Console.WriteLine("CR Constraints/dual price ");
+            oj = 0;
+            foreach (double ax in _reporte.Report_Constrain_RC())
+            {
+                Console.WriteLine("R " + oj + " =" + ax);
+                oj++;
+            }
+
+         
 
             Console.ReadKey();
         }

@@ -16,14 +16,14 @@ namespace Core
         private List<MiembroFo> _fo;
 
         public List<MiembroFo> FO { get => _fo; set => _fo = value; }
-        internal List<Restriction> Res { get => _res; set => _res = value; }
+        public List<Restriction> Res { get => _res; set => _res = value; }
         public SimplexSolver Solver { get => _solver; set => _solver = value; }
         public int Z { get => _z; set => _z = value; }
 
         private SimplexSolver _solver;
         private List<Restriction> _res;
 
-        public Simplex(List<MiembroFo> x, bool Objective)
+        public Simplex(List<MiembroFo> x, int Objective)
         {
             FO = new List<MiembroFo>();
             int i;
@@ -37,17 +37,19 @@ namespace Core
                 Solver.SetCoefficient(_z, FO[i]._value, FO[i].Coef);//asigna los coef de las variables en la func ob
 
             }
-
-
-            Solver.AddGoal(_z, 1, Objective);//determina si es max o min(el uno no se para que sirve)
+            bool aux = false;
+            if (Objective == 1) { aux = true; }
+            else if (Objective == 0) { aux = false; }
+            Solver.AddGoal(_z, 1, aux);//determina si es max o min(el uno no se para que sirve)
         }
 
         public Reporte TransformToFinalReport()
         {
             Reporte x = null;
             Solver.Solve(new SimplexSolverParams());
+
+
             return x;
-           
         }
         public void AddRestriction(List<Restriction> x)//tiene que recibir todas las restricciones ya llenadas
         {
@@ -61,15 +63,23 @@ namespace Core
                 }
 
                 if (t._sign == Signo.Igual)
-                { Solver.SetBounds(t._value, t.Bside, t.Bside);}
+                {
+                    Solver.SetBounds(t._value, t.Bside, t.Bside);
+                }
                 else if (t._sign == Signo.MayorIgualQue)
-                {Solver.SetBounds(t._value, t.Bside, Rational.PositiveInfinity); }
+                {
+                    Solver.SetBounds(t._value, t.Bside, Rational.PositiveInfinity);
+                }
                 else if (t._sign == Signo.MayorQue)
-                { Solver.SetBounds(t._value, t.Bside + 0.1, Rational.PositiveInfinity); }
+                {
+                    Solver.SetBounds(t._value, t.Bside + 0.1, Rational.PositiveInfinity);
+                }
                 else if (t._sign == Signo.MenorIgualQue)
-                { Solver.SetBounds(t._value, t.Bside, Rational.NegativeInfinity);   }
+                {
+                    Solver.SetBounds(t._value, Rational.NegativeInfinity, t.Bside);
+                }
                 else if (t._sign == Signo.MenorQue)
-                { Solver.SetBounds(t._value, t.Bside - 0.1, Rational.NegativeInfinity); }
+                { Solver.SetBounds(t._value, Rational.NegativeInfinity, t.Bside - 0.1); }
             }
         }
 
