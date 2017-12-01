@@ -18,6 +18,7 @@ namespace Core
     public static class Signos
     {
         public static Dictionary<string, Core.Signo> SignosDictionary = new Dictionary<string, Core.Signo>();
+        public static Dictionary<Core.Signo, string> IdSignoDictionary = new Dictionary<Core.Signo, string>();
 
         static Signos()
         {
@@ -26,6 +27,12 @@ namespace Core
             SignosDictionary.Add("=", Signo.Igual);
             SignosDictionary.Add("<=", Signo.MenorIgualQue);
             SignosDictionary.Add("<", Signo.MenorQue);
+
+            IdSignoDictionary.Add(Signo.MayorQue, ">");
+            IdSignoDictionary.Add(Signo.MayorIgualQue, ">=");
+            IdSignoDictionary.Add(Signo.Igual, "=");
+            IdSignoDictionary.Add(Signo.MenorIgualQue, "<=");
+            IdSignoDictionary.Add(Signo.MenorQue, "<");
         }
     }
 }

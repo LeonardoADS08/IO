@@ -36,6 +36,7 @@ namespace Core
         {
             return (double)_sollutions.Solver.GetValue(_sollutions._z);
         }
+        // Coeficientes de la solución
         public List<double> Report_Variables()
         {
             List<double> aux = new List<double>();
@@ -47,6 +48,7 @@ namespace Core
             return aux;
         }
 
+        //  Holgura, excedente
         public List<double> Report_Restriction_Variables()
         {
             List<double> aux = new List<double>();
@@ -57,6 +59,7 @@ namespace Core
             return aux;
         }
 
+        // Limite de las variables (true = Minimo, false = Maximo) (1 = Coeficiente FO, ? = Restricciones)
         public List<Rational> Report_Variable_Limits(bool k, int a)
         {
             List<Rational> fin = new List<Rational>();
@@ -97,6 +100,7 @@ namespace Core
             return fin;
         }
 
+        // Dual de las restricciones
         public List<double> Report_Constrain_RC()
         {
             List<double> fin = new List<double>();
@@ -104,9 +108,72 @@ namespace Core
             {
                 fin.Add(_sensitivityReport.GetDualValue(t._value).ToDouble());
             }
-
             return fin;
         }
+
+
+        public Rational ObtenerZ() => _sollutions.Solver.GetValue(_sollutions._z);
+        
+        public List<Rational> Solucion()
+        {
+            List<Rational> resultado = new List<Rational>();
+            foreach (MiembroFo val in _sollutions.FO)
+            {
+                resultado.Add(_sollutions.Solver.GetValue(val._value));
+            }
+            return resultado;
+        }
+
+        public List<double> HolguraExcedente()
+        {
+            List<double> resultado = new List<double>();
+            foreach (Restriction val in _sollutions.Res)
+            {
+                resultado.Add(_sollutions.Solver.GetValue(val._value).ToDouble() - val.Bside);
+            }
+            return resultado;
+        }
+
+        // Minimo, Maximo
+        public List<Tuple<Rational, Rational>> LimitesCoeficientesObjetivo()
+        {
+            List<Tuple<Rational, Rational>> resultado = new List<Tuple<Rational, Rational>>();
+            foreach (MiembroFo val in _sollutions.FO)
+            {
+                Tuple<Rational, Rational> limites = new Tuple<Rational, Rational>(
+                    _sensitivityReport.GetObjectiveCoefficientRange(val._value, 1).Lower,
+                    _sensitivityReport.GetObjectiveCoefficientRange(val._value, 1).Upper);
+                resultado.Add(limites);
+            }
+            
+            return resultado;
+        }
+
+        // Minimo, Maximo
+        public List<Tuple<Rational, Rational>> LimitesRestriccion()
+        {
+            List<Tuple<Rational, Rational>> resultado = new List<Tuple<Rational, Rational>>();
+
+            foreach (Restriction val in _sollutions.Res)
+            {
+                Tuple<Rational, Rational> limites = new Tuple<Rational, Rational>(
+                    _sensitivityReport.GetVariableRange(val._value).Lower,
+                    _sensitivityReport.GetVariableRange(val._value).Upper);
+                resultado.Add(limites);
+            }
+            return resultado;
+        }
+
+        public List<Rational> DualRestricciones()
+        {
+            List<Rational> resultado = new List<Rational>();
+            foreach (Restriction t in _sollutions.Res)
+            {
+                resultado.Add(_sensitivityReport.GetDualValue(t._value));
+            }
+            return resultado;
+        }
+
 
     }
 
