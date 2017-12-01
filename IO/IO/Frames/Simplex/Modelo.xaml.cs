@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data;
 
 namespace IO.Frames.Simplex
 {
@@ -23,8 +24,10 @@ namespace IO.Frames.Simplex
     {
         public ObservableCollection<Core.MiembroFo> ListFO { get; set; }
         public ObservableCollection<Core.Restriction> ListRest { get; set; }
-        public ObservableCollection<dynamic> ListaSignos { get; set; }
+        public DataTable RestriccionesDT { get; set; }
+
         private int totalVariables, totalRestricciones;
+
         public Modelo(int restricciones, int variables)
         {
             InitializeComponent();
@@ -32,40 +35,35 @@ namespace IO.Frames.Simplex
             totalRestricciones = restricciones;
 
             ListFO = new ObservableCollection<Core.MiembroFo>();
-            ListRest = new ObservableCollection<Core.Restriction>();
-            ListaSignos = new ObservableCollection<dynamic>();
+            RestriccionesDT = new DataTable();
 
             DG_FO.ItemsSource = ListFO;
-            DG_Rest.ItemsSource = ListRest;
 
             for (int i = 0; i < variables; ++i)
                 ListFO.Add( new Core.MiembroFo() );
-            for (int i = 0; i < restricciones; ++i)
+
+
+            for (int i = 0; i < totalVariables; ++i)
             {
-                ListRest.Add(new Core.Restriction());
-                ListRest[i].Coef.Capacity = restricciones;
+                DataColumn columna = new DataColumn(String.Format("Variable {0}", i + 1), typeof(double));
+                RestriccionesDT.Columns.Add(columna);
             }
 
-            for (int i = 0; i < restricciones; ++i)
+            RestriccionesDT.Columns.Add(new DataColumn("Signo", typeof(string)));
+            RestriccionesDT.Columns.Add(new DataColumn("Lado B", typeof(double)));
+
+            for (int i = 0; i < totalRestricciones; ++i)
             {
-                DataGridTextColumn columna = new DataGridTextColumn();
-                columna.Header = "Variable " + (i + 1).ToString();
-                columna.Binding = new Binding("Coef[" + i.ToString() + "]");
-                columna.Width = new DataGridLength(25, DataGridLengthUnitType.Star);
-                DG_Rest.Columns.Add(columna);
+                DataRow newRow = RestriccionesDT.NewRow();
+                for (int j = 0; j < totalVariables; ++j)
+                    newRow[j] = 0;
+
+                newRow[totalVariables + 1] = 0;
+                RestriccionesDT.Rows.Add(newRow);
+
             }
 
-
-            DataGridTextColumn columnaSigno = new DataGridTextColumn();
-            columnaSigno.Header = "Signo";
-            columnaSigno.Width = new DataGridLength(25, DataGridLengthUnitType.Star);
-            DG_Rest.Columns.Add(columnaSigno);
-
-            DataGridTextColumn ladoB = new DataGridTextColumn();
-            ladoB.Header = "Lado B";
-            ladoB.Width = new DataGridLength(25, DataGridLengthUnitType.Star);
-            DG_Rest.Columns.Add(ladoB);
-
+            DG_Rest.ItemsSource = RestriccionesDT.AsDataView();
 
         }
 
@@ -164,9 +162,29 @@ namespace IO.Frames.Simplex
             }
 
             // Indice de 'Signo'
+            Core.Signo signoUsado;
             if (columnIndex == totalRestricciones)
             {
-                    if (Signos.signos.)
+                if (!Core.Signos.SignosDictionary.TryGetValue(newText, out signoUsado))
+                {
+                    MessageBox.Show("Signo invalido", "Error", MessageBoxButton.OK);
+                    RestriccionesDT.Rows[rowIndex][columnIndex] = "";
+                }
+            }
+        }
+
+        private void B_ReestablecerRestricciones_Click(object sender, RoutedEventArgs e)
+        {
+            RestriccionesDT.Clear();
+            for (int i = 0; i < totalRestricciones; ++i)
+            {
+                DataRow newRow = RestriccionesDT.NewRow();
+                for (int j = 0; j < totalVariables; ++j)
+                    newRow[j] = 0;
+
+                newRow[totalVariables + 1] = 0;
+                RestriccionesDT.Rows.Add(newRow);
+
             }
         }
 
@@ -174,6 +192,10 @@ namespace IO.Frames.Simplex
         {
             e.Row.Header = "Restricción " + (e.Row.GetIndex() + 1).ToString() + ":";
             e.Row.Height = 25;
+        }
+        private void B_GenerarReporte_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
 
