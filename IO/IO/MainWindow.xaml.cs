@@ -105,5 +105,10 @@ namespace IO
             if (F_Simplex_Inicio == null) F_Grafico = new Frames.Grafico();
             F_Vista.Content = F_Grafico;
         }
+
+        private void F_Vista_Navigated(object sender, NavigationEventArgs e)
+        {
+
+        }
     }
 }

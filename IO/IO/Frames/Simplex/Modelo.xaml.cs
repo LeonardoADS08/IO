@@ -47,11 +47,7 @@ namespace IO.Frames.Simplex
                 DG_Rest.ItemsSource = RestriccionesDT.AsDataView();
 
                 // Se crea la cantidad de variables que se pidio
-                for (int i = 0; i < variables; ++i)
-                {
-                    ListFO.Add(new Core.MiembroFo());
-                    ListFO[i].Name = "";
-                }
+                ReiniciarVariables();
 
                 // Se crea la cantidad de restricciones que se pidio
                 RestriccionesDT.Columns.Add(new DataColumn("Nombre", typeof(string)));
@@ -65,17 +61,7 @@ namespace IO.Frames.Simplex
                 RestriccionesDT.Columns.Add(new DataColumn("Lado B", typeof(double)));
 
                 // Se inicializa los valores de las restricciones
-                for (int i = 0; i < totalRestricciones; ++i)
-                {
-                    DataRow newRow = RestriccionesDT.NewRow();
-                    newRow[0] = "";
-                    newRow[totalVariables + 1] = "";
-                    for (int j = 1; j <= totalVariables; ++j)
-                        newRow[j] = 0;
-
-                    newRow[totalVariables + 2] = 0;
-                    RestriccionesDT.Rows.Add(newRow);
-                }
+                ReiniciarRestricciones();
 
                 // Se le da valor al ComboBox
                 CB_TipoModelo.DisplayMemberPath = "Key";
@@ -214,21 +200,7 @@ namespace IO.Frames.Simplex
             }
         }
 
-        private void B_ReestablecerRestricciones_Click(object sender, RoutedEventArgs e)
-        {
-            RestriccionesDT.Clear();
-            for (int i = 0; i < totalRestricciones; ++i)
-            {
-                DataRow newRow = RestriccionesDT.NewRow();
-                newRow[0] = "";
-                newRow[totalVariables + 1] = "";
-                for (int j = 1; j <= totalVariables; ++j)
-                    newRow[j] = 0;
-
-                newRow[totalVariables + 2] = 0;
-                RestriccionesDT.Rows.Add(newRow);
-            }
-        }
+        private void B_ReestablecerRestricciones_Click(object sender, RoutedEventArgs e) => ReiniciarRestricciones();
 
         private void DG_Rest_LoadingRow(object sender, DataGridRowEventArgs e)
         {
@@ -241,6 +213,7 @@ namespace IO.Frames.Simplex
             try
             {
                 int TipoModelo = (int)CB_TipoModelo.SelectedValue;
+                ListRest.Clear();
                 for (int i = 0; i < totalRestricciones; ++i)
                 {
                     ListRest.Add(new Core.Restriction());
@@ -288,10 +261,36 @@ namespace IO.Frames.Simplex
             {
                 if ( MessageBox.Show("No se ha podido generar el reporte. \n ¿Ver excepción?", "Error", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     MessageBox.Show(ex.Message, "Exception");
-            }
-            
+            } 
         }
 
 
+
+        // Funciones extras
+        private void ReiniciarRestricciones()
+        {
+            RestriccionesDT.Clear();
+            for (int i = 0; i < totalRestricciones; ++i)
+            {
+                DataRow newRow = RestriccionesDT.NewRow();
+                newRow[0] = "";
+                newRow[totalVariables + 1] = "";
+                for (int j = 1; j <= totalVariables; ++j)
+                    newRow[j] = 0;
+
+                newRow[totalVariables + 2] = 0;
+                RestriccionesDT.Rows.Add(newRow);
+            }
+        }
+
+        private void ReiniciarVariables()
+        {
+            ListFO.Clear();
+            for (int i = 0; i < totalVariables; ++i)
+            {
+                ListFO.Add(new Core.MiembroFo());
+                ListFO[i].Name = "";
+            }
+        }
     }
 }
