@@ -24,6 +24,7 @@
 
         <DataGrid x:Name="DG_Rest" Margin="65,309,65,88" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserReorderColumns="False" HorizontalGridLinesBrush="#FFD4D4D4" VerticalGridLinesBrush="#FFD4D4D4" LoadingRow="DG_Rest_LoadingRow" AutoGenerateColumns="True"  ColumnWidth="*" CellEditEnding="DG_Rest_CellEditEnding" IsSynchronizedWithCurrentItem="False" ItemsSource="{Binding}" FontSize="14" />
         <Button x:Name="B_ReestablecerRestricciones" Content="Reestablecer" Margin="0,0,65,64" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="155" Click="B_ReestablecerRestricciones_Click" />
+        <ComboBox x:Name="CB_TipoModelo" HorizontalAlignment="Right" Margin="0,0,235,27" VerticalAlignment="Bottom" Width="219"/>
 
     </Grid>
 </Page>

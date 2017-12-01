@@ -23,7 +23,7 @@ namespace IO.Frames.Simplex
     public partial class Modelo : Page
     {
         public ObservableCollection<Core.MiembroFo> ListFO { get; set; }
-        public ObservableCollection<Core.Restriction> ListRest { get; set; }
+        public List<Core.Restriction> ListRest { get; set; }
         public DataTable RestriccionesDT { get; set; }
 
         private int totalVariables, totalRestricciones;
@@ -31,40 +31,64 @@ namespace IO.Frames.Simplex
         public Modelo(int restricciones, int variables)
         {
             InitializeComponent();
-            totalVariables = variables;
-            totalRestricciones = restricciones;
-
-            ListFO = new ObservableCollection<Core.MiembroFo>();
-            RestriccionesDT = new DataTable();
-
-            DG_FO.ItemsSource = ListFO;
-
-            for (int i = 0; i < variables; ++i)
-                ListFO.Add( new Core.MiembroFo() );
-
-
-            for (int i = 0; i < totalVariables; ++i)
+            try
             {
-                DataColumn columna = new DataColumn(String.Format("Variable {0}", i + 1), typeof(double));
-                RestriccionesDT.Columns.Add(columna);
+                // Se guardan la cantidad de restricciones y variables
+                totalVariables = variables;
+                totalRestricciones = restricciones;
+
+                // Se instancian los objetos que van a guardar los datos
+                ListFO = new ObservableCollection<Core.MiembroFo>();
+                ListRest = new List<Core.Restriction>();
+                RestriccionesDT = new DataTable();
+
+                // Se hace los binding
+                DG_FO.ItemsSource = ListFO;
+                DG_Rest.ItemsSource = RestriccionesDT.AsDataView();
+
+                // Se crea la cantidad de variables que se pidio
+                for (int i = 0; i < variables; ++i)
+                {
+                    ListFO.Add(new Core.MiembroFo());
+                    ListFO[i].Name = "";
+                }
+
+                // Se crea la cantidad de restricciones que se pidio
+                RestriccionesDT.Columns.Add(new DataColumn("Nombre", typeof(string)));
+                for (int i = 0; i < totalVariables; ++i)
+                {
+                    DataColumn columna = new DataColumn(String.Format("Variable {0}", i + 1), typeof(double));
+                    RestriccionesDT.Columns.Add(columna);
+                }
+
+                RestriccionesDT.Columns.Add(new DataColumn("Signo", typeof(string)));
+                RestriccionesDT.Columns.Add(new DataColumn("Lado B", typeof(double)));
+
+                // Se inicializa los valores de las restricciones
+                for (int i = 0; i < totalRestricciones; ++i)
+                {
+                    DataRow newRow = RestriccionesDT.NewRow();
+                    newRow[0] = "";
+                    newRow[totalVariables + 1] = "";
+                    for (int j = 1; j <= totalVariables; ++j)
+                        newRow[j] = 0;
+
+                    newRow[totalVariables + 2] = 0;
+                    RestriccionesDT.Rows.Add(newRow);
+                }
+
+                // Se le da valor al ComboBox
+                CB_TipoModelo.DisplayMemberPath = "Key";
+                CB_TipoModelo.SelectedValuePath = "Value";
+                CB_TipoModelo.Items.Add(new KeyValuePair<string, int>("Maximizar", 0));
+                CB_TipoModelo.Items.Add(new KeyValuePair<string, int>("Minimizar", 1));
+                CB_TipoModelo.SelectedIndex = 0;
             }
-
-            RestriccionesDT.Columns.Add(new DataColumn("Signo", typeof(string)));
-            RestriccionesDT.Columns.Add(new DataColumn("Lado B", typeof(double)));
-
-            for (int i = 0; i < totalRestricciones; ++i)
+            catch (Exception ex)
             {
-                DataRow newRow = RestriccionesDT.NewRow();
-                for (int j = 0; j < totalVariables; ++j)
-                    newRow[j] = 0;
-
-                newRow[totalVariables + 1] = 0;
-                RestriccionesDT.Rows.Add(newRow);
-
+                if (MessageBox.Show("Error de ejecución. \n ¿Ver excepción?", "Error", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    MessageBox.Show(ex.Message, "Exception");
             }
-
-            DG_Rest.ItemsSource = RestriccionesDT.AsDataView();
-
         }
 
         private void DG_FO_LoadingRow(object sender, DataGridRowEventArgs e)
@@ -97,79 +121,96 @@ namespace IO.Frames.Simplex
 
         private void DG_FO_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
-            DependencyObject dep = (DependencyObject)e.EditingElement;
-            string newText = string.Empty;
-
-            if (dep is TextBox)
+            try
             {
-                TextBox txt = dep as TextBox;
-                if (txt.Text != "") newText = txt.Text;
-                else newText = string.Empty;
-            }
-     
-            int columnIndex = -1, rowIndex = -1;
-            while ((dep != null) && !(dep is DataGridCell))
-                dep = VisualTreeHelper.GetParent(dep);
+                DependencyObject dep = (DependencyObject)e.EditingElement;
+                string newText = string.Empty;
 
-            if (dep == null)  return;
+                if (dep is TextBox)
+                {
+                    TextBox txt = dep as TextBox;
+                    if (txt.Text != "") newText = txt.Text;
+                    else newText = string.Empty;
+                }
 
-            if (dep is DataGridCell)
-            {
-                DataGridCell cell = dep as DataGridCell;
-                while ((dep != null) && !(dep is DataGridRow))
+                int columnIndex = -1, rowIndex = -1;
+                while ((dep != null) && !(dep is DataGridCell))
                     dep = VisualTreeHelper.GetParent(dep);
 
                 if (dep == null) return;
 
-                DataGridRow row = dep as DataGridRow;
-                rowIndex = row.GetIndex();
-                columnIndex = cell.Column.DisplayIndex;
-            }
+                if (dep is DataGridCell)
+                {
+                    DataGridCell cell = dep as DataGridCell;
+                    while ((dep != null) && !(dep is DataGridRow))
+                        dep = VisualTreeHelper.GetParent(dep);
 
-            if (columnIndex == 0 && rowIndex != -1 && newText != "")
-                DG_Rest.Columns[rowIndex].Header = newText;
+                    if (dep == null) return;
+
+                    DataGridRow row = dep as DataGridRow;
+                    rowIndex = row.GetIndex();
+                    columnIndex = cell.Column.DisplayIndex;
+                }
+
+                if (columnIndex == 0 && rowIndex != -1 && newText != "")
+                    DG_Rest.Columns[rowIndex + 1].Header = newText;
+            }
+            catch (Exception ex)
+            {
+                if (MessageBox.Show("Error de ejecución. \n ¿Ver excepción?", "Error", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    MessageBox.Show(ex.Message, "Exception");
+            }
         }
 
         private void DG_Rest_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
-            DependencyObject dep = (DependencyObject)e.EditingElement;
-            string newText = string.Empty;
-
-            if (dep is TextBox)
+            try
             {
-                TextBox txt = dep as TextBox;
-                if (txt.Text != "") newText = txt.Text;
-                else newText = string.Empty;
-            }
+                DependencyObject dep = (DependencyObject)e.EditingElement;
+                string newText = string.Empty;
 
-            int columnIndex = -1, rowIndex = -1;
-            while ((dep != null) && !(dep is DataGridCell))
-                dep = VisualTreeHelper.GetParent(dep);
+                if (dep is TextBox)
+                {
+                    TextBox txt = dep as TextBox;
+                    if (txt.Text != "") newText = txt.Text;
+                    else newText = string.Empty;
+                }
 
-            if (dep == null) return;
-
-            if (dep is DataGridCell)
-            {
-                DataGridCell cell = dep as DataGridCell;
-                while ((dep != null) && !(dep is DataGridRow))
+                int columnIndex = -1, rowIndex = -1;
+                while ((dep != null) && !(dep is DataGridCell))
                     dep = VisualTreeHelper.GetParent(dep);
 
                 if (dep == null) return;
 
-                DataGridRow row = dep as DataGridRow;
-                rowIndex = row.GetIndex();
-                columnIndex = cell.Column.DisplayIndex;
-            }
-
-            // Indice de 'Signo'
-            Core.Signo signoUsado;
-            if (columnIndex == totalRestricciones)
-            {
-                if (!Core.Signos.SignosDictionary.TryGetValue(newText, out signoUsado))
+                if (dep is DataGridCell)
                 {
-                    MessageBox.Show("Signo invalido", "Error", MessageBoxButton.OK);
-                    RestriccionesDT.Rows[rowIndex][columnIndex] = "";
+                    DataGridCell cell = dep as DataGridCell;
+                    while ((dep != null) && !(dep is DataGridRow))
+                        dep = VisualTreeHelper.GetParent(dep);
+
+                    if (dep == null) return;
+
+                    DataGridRow row = dep as DataGridRow;
+                    rowIndex = row.GetIndex();
+                    columnIndex = cell.Column.DisplayIndex;
                 }
+
+                // Indice de 'Signo'
+                Core.Signo signoUsado;
+                if (columnIndex == totalVariables + 1)
+                {
+                    if (newText == "") return;
+                    if (!Core.Signos.SignosDictionary.TryGetValue(newText, out signoUsado))
+                    {
+                        MessageBox.Show("Signo invalido", "Error", MessageBoxButton.OK);
+                        RestriccionesDT.Rows[rowIndex][columnIndex] = "";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (MessageBox.Show("Error de ejecución. \n ¿Ver excepción?", "Error", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    MessageBox.Show(ex.Message, "Exception");
             }
         }
 
@@ -179,12 +220,13 @@ namespace IO.Frames.Simplex
             for (int i = 0; i < totalRestricciones; ++i)
             {
                 DataRow newRow = RestriccionesDT.NewRow();
-                for (int j = 0; j < totalVariables; ++j)
+                newRow[0] = "";
+                newRow[totalVariables + 1] = "";
+                for (int j = 1; j <= totalVariables; ++j)
                     newRow[j] = 0;
 
-                newRow[totalVariables + 1] = 0;
+                newRow[totalVariables + 2] = 0;
                 RestriccionesDT.Rows.Add(newRow);
-
             }
         }
 
@@ -193,9 +235,61 @@ namespace IO.Frames.Simplex
             e.Row.Header = "Restricción " + (e.Row.GetIndex() + 1).ToString() + ":";
             e.Row.Height = 25;
         }
+
         private void B_GenerarReporte_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                int TipoModelo = (int)CB_TipoModelo.SelectedValue;
+                for (int i = 0; i < totalRestricciones; ++i)
+                {
+                    ListRest.Add(new Core.Restriction());
+                    ListRest[i].Name = (string)RestriccionesDT.Rows[i][0];
+                    ListRest[i].Bside = (double)RestriccionesDT.Rows[i][totalVariables + 2];
+                    // Verificando que no falte un signo
+                    if ((string)RestriccionesDT.Rows[i][totalVariables + 1] == "")
+                    {
+                        MessageBox.Show("Falta indicar un signo en una restricción.", "Error", MessageBoxButton.OK);
+                        return;
+                    }
+                    ListRest[i]._sign = Core.Signos.SignosDictionary[(string)RestriccionesDT.Rows[i][totalVariables + 1]];
+                    for (int j = 1; j <= totalVariables; ++j)
+                        ListRest[i].Coef.Add((double)RestriccionesDT.Rows[i][j]);
 
+                }
+
+                // Verificamos que no falten datos fundamentales
+                // Funcion objetivo
+                // Nombres
+                foreach (var val in ListFO)
+                {
+                    if (val.Name == "")
+                    {
+                        MessageBox.Show("Falta nombrar una variable.", "Error", MessageBoxButton.OK);
+                        return;
+                    }
+                }
+
+                // Restricciones
+                // Verificando que no falte un nombre
+                foreach (var val in ListRest)
+                {
+                    if (val.Name == "")
+                    {
+                        MessageBox.Show("Falta nombrar una restricción.", "Error", MessageBoxButton.OK);
+                        return;
+                    }     
+                }
+
+                Frames.Simplex.Reporte Reporte = new Reporte(ListFO.ToList(), ListRest, TipoModelo);
+                Reporte.Show();
+            }
+            catch (Exception ex)
+            {
+                if ( MessageBox.Show("No se ha podido generar el reporte. \n ¿Ver excepción?", "Error", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    MessageBox.Show(ex.Message, "Exception");
+            }
+            
         }
 
 
