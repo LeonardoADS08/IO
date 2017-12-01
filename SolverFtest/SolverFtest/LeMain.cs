@@ -194,7 +194,12 @@ namespace SolverFtest
                 oj++;
             }
 
-         
+            Console.WriteLine(aurus.Solver.PivotCount);
+            Console.WriteLine(aurus.Solver.BranchCount);
+
+            Console.WriteLine(aurus.Solver.FactorCount);
+
+            Console.WriteLine(aurus.Solver.SolvedGoalCount);
 
             Console.ReadKey();
         }

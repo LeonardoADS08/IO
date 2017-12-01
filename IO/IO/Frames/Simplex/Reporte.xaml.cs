@@ -40,6 +40,8 @@ namespace IO.Frames.Simplex
 
             // Informacion básica
             L_ValorObjetivo.Content += " " + ReporteModelo.ObtenerZ().ToString();
+            L_Restricciones.Content += " " + Rest.Count;
+            L_Variables.Content += " " + FO.Count;
 
             // Variables
             DataTable VariablesDT = new DataTable();
@@ -87,7 +89,7 @@ namespace IO.Frames.Simplex
                 Double temp = new Double();
                 temp = HolguraExcedente[i];
                 newRow[3] = temp;
-                newRow[4] = Duales[i].ToDouble();
+                newRow[4] = Duales[i];
                 newRow[5] = LimitesRestricciones[i].Item1.ToString();
                 newRow[6] = LimitesRestricciones[i].Item2.ToString();
 

@@ -164,12 +164,12 @@ namespace Core
             return resultado;
         }
 
-        public List<Rational> DualRestricciones()
+        public List<double> DualRestricciones()
         {
-            List<Rational> resultado = new List<Rational>();
+            List<double> resultado = new List<double>();
             foreach (Restriction t in _sollutions.Res)
             {
-                resultado.Add(_sensitivityReport.GetDualValue(t._value));
+                resultado.Add(_sensitivityReport.GetDualValue(t._value).ToDouble() * -1);
             }
             return resultado;
         }

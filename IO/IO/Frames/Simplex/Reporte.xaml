@@ -10,11 +10,12 @@
         <GroupBox Header="Informacion Básica" Height="86" Margin="10,15,14.6,0" VerticalAlignment="Top" d:IsLocked="True"/>
         <GroupBox Header="Variables" Height="198" Margin="10,106,14.6,0" VerticalAlignment="Top" d:IsLocked="True"/>
         <GroupBox Header="Restricciones" Height="227" Margin="10,309,14.6,0" VerticalAlignment="Top" d:IsLocked="True"/>
-        <Label x:Name="L_Iteraciones" Content="Iteraciones:"  HorizontalAlignment="Left" Margin="35,39,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.339,-0.5" Width="730"/>
         <Label x:Name="L_ValorObjetivo" Content="Valor objetivo (z):"  HorizontalAlignment="Left" Margin="35,65,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.339,-0.5" Width="730"/>
         <DataGrid x:Name="DG_Variables" HorizontalAlignment="Left" Height="162" Margin="27,131,0,0" VerticalAlignment="Top" Width="834" FontSize="14" ColumnWidth="*"  CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserReorderColumns="False" HorizontalGridLinesBrush="#FFD4D4D4" VerticalGridLinesBrush="#FFD4D4D4" SelectionMode="Single" SelectionUnit="Cell" CanUserResizeRows="False" IsReadOnly="True"/>
         <DataGrid x:Name="DG_Restricciones" HorizontalAlignment="Left" Height="182" Margin="27,337,0,0" VerticalAlignment="Top" Width="834" FontSize="14" ColumnWidth="*" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserReorderColumns="False" HorizontalGridLinesBrush="#FFD4D4D4" VerticalGridLinesBrush="#FFD4D4D4" SelectionMode="Single" SelectionUnit="Cell" CanUserResizeRows="False" IsReadOnly="True"/>
         <Button x:Name="B_Salir" Content="Salir" HorizontalAlignment="Left" Margin="721,543,0,0" VerticalAlignment="Top" Width="158" Click="B_Salir_Click"/>
+        <Label x:Name="L_Restricciones" Content="Numero de restricciones:"  HorizontalAlignment="Left" Margin="35,41,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.339,-0.5" Width="377"/>
+        <Label x:Name="L_Variables" Content="Numero de variables:"  HorizontalAlignment="Left" Margin="434,39,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.339,-0.5" Width="377"/>
 
     </Grid>
 </Window>
