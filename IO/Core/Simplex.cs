@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.SolverFoundation.Services;
-using Microsoft.SolverFoundation.Common;
+﻿using Microsoft.SolverFoundation.Common;
 using Microsoft.SolverFoundation.Solvers;
+using System.Collections.Generic;
 
 namespace Core
 {
@@ -35,7 +30,6 @@ namespace Core
                 Solver.AddVariable(FO[i].Nombre, out FO[i]._valor);//asigna donde se guardaran los resultados;
                 Solver.SetBounds(FO[i]._valor, 0, Rational.PositiveInfinity);//asigna los limites de las variables
                 Solver.SetCoefficient(_z, FO[i]._valor, FO[i].Coeficiente);//asigna los coef de las variables en la func ob
-
             }
             bool aux = false;
             if (Objective == 1) { aux = true; }
@@ -48,9 +42,9 @@ namespace Core
             Reporte x = null;
             Solver.Solve(new SimplexSolverParams());
 
-
             return x;
         }
+
         public void AddRestriction(List<Restriction> x)//tiene que recibir todas las restricciones ya llenadas
         {
             Res = x;
@@ -82,7 +76,5 @@ namespace Core
                 { Solver.SetBounds(t.HolguraExcedente, Rational.NegativeInfinity, t.LadoB - 0.1); }
             }
         }
-
-
     }
 }

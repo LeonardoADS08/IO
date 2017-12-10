@@ -1,19 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Data;
 
 namespace IO.Frames.Simplex
 {
@@ -228,7 +220,6 @@ namespace IO.Frames.Simplex
                     ListRest[i].Signo = Core.Signos.SignosDictionary[(string)RestriccionesDT.Rows[i][totalVariables + 1]];
                     for (int j = 1; j <= totalVariables; ++j)
                         ListRest[i].Coeficientes.Add((double)RestriccionesDT.Rows[i][j]);
-
                 }
 
                 // Verificamos que no falten datos fundamentales
@@ -251,7 +242,7 @@ namespace IO.Frames.Simplex
                     {
                         MessageBox.Show("Falta nombrar una restricción.", "Error", MessageBoxButton.OK);
                         return;
-                    }     
+                    }
                 }
 
                 Frames.Simplex.Reporte Reporte = new Reporte(ListFO.ToList(), ListRest, TipoModelo);
@@ -259,12 +250,10 @@ namespace IO.Frames.Simplex
             }
             catch (Exception ex)
             {
-                if ( MessageBox.Show("No se ha podido generar el reporte. \n ¿Ver excepción?", "Error", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (MessageBox.Show("No se ha podido generar el reporte. \n ¿Ver excepción?", "Error", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     MessageBox.Show(ex.Message, "Exception");
-            } 
+            }
         }
-
-
 
         // Funciones extras
         private void ReiniciarRestricciones()

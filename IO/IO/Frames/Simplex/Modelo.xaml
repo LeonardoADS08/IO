@@ -1,30 +1,29 @@
 ﻿<Page x:Class="IO.Frames.Simplex.Modelo"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:IO.Frames.Simplex"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
      d:DesignHeight="600" d:DesignWidth="1280" Background="#ecf0f1"
       Title="Modelo">
 
     <Grid>
-        <GroupBox Header="Modelo" Margin="15" d:IsLocked="True"/>
-        <GroupBox Header="Función objetivo" Height="196" Margin="45,45,45,0" VerticalAlignment="Top"/>
-        <GroupBox Header="Restricciones" Margin="45,258,45,56"/>
+        <GroupBox Header="Modelo" Margin="15" d:IsLocked="True" />
+        <GroupBox Header="Función objetivo" Height="196" Margin="45,45,45,0" VerticalAlignment="Top" />
+        <GroupBox Header="Restricciones" Margin="45,258,45,56" />
 
         <DataGrid x:Name="DG_FO"  Height="129" Margin="65,75,65,0" VerticalAlignment="Top" ItemsSource="{Binding ListFO}" AutoGenerateColumns="False" LoadingRow="DG_FO_LoadingRow" IsSynchronizedWithCurrentItem="True" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserReorderColumns="False" HorizontalGridLinesBrush="#FFD4D4D4" VerticalGridLinesBrush="#FFD4D4D4" CellEditEnding="DG_FO_CellEditEnding" FontSize="14" SelectionMode="Single" SelectionUnit="Cell">
-            <DataGrid.Columns >
-                <DataGridTextColumn Header="Nombre de la variable" Binding="{Binding Name}" Width="*"/>
-                <DataGridTextColumn Header="Coeficiente" Binding="{Binding Coef}" Width="*"/>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nombre de la variable" Binding="{Binding Name}" Width="*" />
+                <DataGridTextColumn Header="Coeficiente" Binding="{Binding Coef}" Width="*" />
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="B_Reestablecer" Content="Reestablecer" Margin="0,209,65,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="155" Click="B_Reestablecer_Click" />
         <Button x:Name="B_GenerarReporte" Content="Generar reporte" Margin="0,0,45,28" VerticalAlignment="Bottom" Width="185" Height="19" HorizontalAlignment="Right" Click="B_GenerarReporte_Click" />
 
-        <DataGrid x:Name="DG_Rest" Margin="65,309,65,88" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserReorderColumns="False" HorizontalGridLinesBrush="#FFD4D4D4" VerticalGridLinesBrush="#FFD4D4D4" LoadingRow="DG_Rest_LoadingRow" AutoGenerateColumns="True"  ColumnWidth="*" CellEditEnding="DG_Rest_CellEditEnding" IsSynchronizedWithCurrentItem="False" ItemsSource="{Binding}" FontSize="14" SelectionMode="Single" SelectionUnit="Cell"/>
+        <DataGrid x:Name="DG_Rest" Margin="65,309,65,88" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserReorderColumns="False" HorizontalGridLinesBrush="#FFD4D4D4" VerticalGridLinesBrush="#FFD4D4D4" LoadingRow="DG_Rest_LoadingRow" AutoGenerateColumns="True"  ColumnWidth="*" CellEditEnding="DG_Rest_CellEditEnding" IsSynchronizedWithCurrentItem="False" ItemsSource="{Binding}" FontSize="14" SelectionMode="Single" SelectionUnit="Cell" />
         <Button x:Name="B_ReestablecerRestricciones" Content="Reestablecer" Margin="0,0,65,64" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="155" Click="B_ReestablecerRestricciones_Click" />
-        <ComboBox x:Name="CB_TipoModelo" HorizontalAlignment="Right" Margin="0,0,235,27" VerticalAlignment="Bottom" Width="219"/>
-
+        <ComboBox x:Name="CB_TipoModelo" HorizontalAlignment="Right" Margin="0,0,235,27" VerticalAlignment="Bottom" Width="219" />
     </Grid>
 </Page>

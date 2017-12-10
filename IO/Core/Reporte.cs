@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.SolverFoundation.Common;
-using Microsoft.SolverFoundation.Solvers;
+﻿using Microsoft.SolverFoundation.Common;
 using Microsoft.SolverFoundation.Services;
-
+using Microsoft.SolverFoundation.Solvers;
+using System;
+using System.Collections.Generic;
 
 namespace Core
 {
@@ -29,9 +25,8 @@ namespace Core
             _sensitivityReport = _reportSensitivity as ILinearSolverSensitivityReport;
         }
 
-        
         public Rational ObtenerZ() => _sollutions.Solver.GetValue(_sollutions._z);
-        
+
         public List<Rational> Solucion()
         {
             List<Rational> resultado = new List<Rational>();
@@ -63,7 +58,7 @@ namespace Core
                     _sensitivityReport.GetObjectiveCoefficientRange(val._valor, 1).Upper);
                 resultado.Add(limites);
             }
-            
+
             return resultado;
         }
 
@@ -91,9 +86,5 @@ namespace Core
             }
             return resultado;
         }
-
-
     }
-
-
 }

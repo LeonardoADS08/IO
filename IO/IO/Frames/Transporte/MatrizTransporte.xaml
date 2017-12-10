@@ -1,41 +1,39 @@
 ﻿<Page x:Class="IO.Frames.Transporte.MatrizTransporte"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:IO.Frames.Transporte"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
       d:DesignHeight="600" d:DesignWidth="1280" Background="#ecf0f1"
       Title="Transporte">
 
     <Grid>
-        <GroupBox Header="Modelo" Margin="15" d:IsLocked="True"/>
-        <GroupBox Header="Matriz de costos" Height="303" Margin="45,45,45,0" VerticalAlignment="Top" d:IsLocked="True"/>
-        <GroupBox Header="Restricciones" Margin="45,353,45,56" d:IsLocked="True"/>
-        <GroupBox Header="Informacion de la matriz" HorizontalAlignment="Right" Height="231" Margin="0,75,66,0" VerticalAlignment="Top" Width="182" d:IsLocked="True"/>
+        <GroupBox Header="Modelo" Margin="15" d:IsLocked="True" />
+        <GroupBox Header="Matriz de costos" Height="303" Margin="45,45,45,0" VerticalAlignment="Top" d:IsLocked="True" />
+        <GroupBox Header="Restricciones" Margin="45,353,45,56" d:IsLocked="True" />
+        <GroupBox Header="Informacion de la matriz" HorizontalAlignment="Right" Height="231" Margin="0,75,66,0" VerticalAlignment="Top" Width="182" d:IsLocked="True" />
 
-        <GroupBox Header="Priorizar ofertante" Margin="65,382,0,73" HorizontalAlignment="Left" Width="270" d:IsLocked="True"/>
-        <GroupBox Header="Priorizar demandante" Margin="352,382,0,73" HorizontalAlignment="Left" Width="270" d:IsLocked="True"/>
-        <GroupBox Header="Multas" Margin="642,382,0,73" HorizontalAlignment="Left" Width="270" d:IsLocked="True"/>
-        <GroupBox Header="Bonos" Margin="935,382,0,73" HorizontalAlignment="Left" Width="270" d:IsLocked="True"/>
+        <GroupBox Header="Priorizar ofertante" Margin="65,382,0,73" HorizontalAlignment="Left" Width="270" d:IsLocked="True" />
+        <GroupBox Header="Priorizar demandante" Margin="352,382,0,73" HorizontalAlignment="Left" Width="270" d:IsLocked="True" />
+        <GroupBox Header="Multas" Margin="642,382,0,73" HorizontalAlignment="Left" Width="270" d:IsLocked="True" />
+        <GroupBox Header="Bonos" Margin="935,382,0,73" HorizontalAlignment="Left" Width="270" d:IsLocked="True" />
 
-        <DataGrid x:Name="DG_Matriz" Height="231" Margin="65,75,268,0" VerticalAlignment="Top" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserReorderColumns="False" HorizontalGridLinesBrush="#FFD4D4D4" VerticalGridLinesBrush="#FFD4D4D4" AutoGenerateColumns="True"  ColumnWidth="*" IsSynchronizedWithCurrentItem="False" ItemsSource="{Binding}" FontSize="14" SelectionMode="Single" SelectionUnit="Cell" LoadingRow="DG_Matriz_LoadingRow" CellEditEnding="DG_Matriz_CellEditEnding" CurrentCellChanged="DG_Matriz_CurrentCellChanged"/>
+        <DataGrid x:Name="DG_Matriz" Height="231" Margin="65,75,268,0" VerticalAlignment="Top" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserReorderColumns="False" HorizontalGridLinesBrush="#FFD4D4D4" VerticalGridLinesBrush="#FFD4D4D4" AutoGenerateColumns="True"  ColumnWidth="*" IsSynchronizedWithCurrentItem="False" ItemsSource="{Binding}" FontSize="14" SelectionMode="Single" SelectionUnit="Cell" LoadingRow="DG_Matriz_LoadingRow" CellEditEnding="DG_Matriz_CellEditEnding" CurrentCellChanged="DG_Matriz_CurrentCellChanged" />
         <StackPanel HorizontalAlignment="Right" Height="191" Margin="0,102,84,0" VerticalAlignment="Top" Width="154">
             <Label x:Name="L_Demandantes" Content="Demandantes:" />
             <Label x:Name="L_Ofertantes" Content="Ofertantes:" />
             <Label x:Name="L_TotalOferta" Content="Total oferta:" />
             <Label x:Name="L_TotalDemanda" Content="Total demanda:" />
             <Label x:Name="L_Diferencia" Content="Diferencia O-D:" />
-
         </StackPanel>
-        <Button Content="Reestablecer" HorizontalAlignment="Right" Margin="0,311,268,0" VerticalAlignment="Top" Width="150" Click="Button_Click"/>
+        <Button Content="Reestablecer" HorizontalAlignment="Right" Margin="0,311,268,0" VerticalAlignment="Top" Width="150" Click="Button_Click" />
 
         <Button x:Name="B_GenerarReporte" Content="Generar reporte" Margin="0,0,45,28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="155" Click="B_GenerarReporte_Click" />
-        <ComboBox x:Name="CB_TipoModelo" HorizontalAlignment="Right" Margin="0,0,209,27" VerticalAlignment="Bottom" Width="219"/>
-        <CheckBox x:Name="CB_PriorizarOfertante" Content="Activar restricción" HorizontalAlignment="Left" Margin="77,405,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="CB_PriorizarDemandante" Content="Activar restricción" HorizontalAlignment="Left" Margin="364,405,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="CB_Multas" Content="Activar restricción" HorizontalAlignment="Left" Margin="656,405,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="CB_Bonos" Content="Activar restricción" HorizontalAlignment="Left" Margin="948,405,0,0" VerticalAlignment="Top"/>
-
+        <ComboBox x:Name="CB_TipoModelo" HorizontalAlignment="Right" Margin="0,0,209,27" VerticalAlignment="Bottom" Width="219" />
+        <CheckBox x:Name="CB_PriorizarOfertante" Content="Activar restricción" HorizontalAlignment="Left" Margin="77,405,0,0" VerticalAlignment="Top" />
+        <CheckBox x:Name="CB_PriorizarDemandante" Content="Activar restricción" HorizontalAlignment="Left" Margin="364,405,0,0" VerticalAlignment="Top" />
+        <CheckBox x:Name="CB_Multas" Content="Activar restricción" HorizontalAlignment="Left" Margin="656,405,0,0" VerticalAlignment="Top" />
+        <CheckBox x:Name="CB_Bonos" Content="Activar restricción" HorizontalAlignment="Left" Margin="948,405,0,0" VerticalAlignment="Top" />
     </Grid>
 </Page>

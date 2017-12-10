@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data;
-
-namespace Core
+﻿namespace Core
 {
     public class MiembroFuncionObjetivo
     {
@@ -21,6 +14,5 @@ namespace Core
             _valor = 0;
             _coeficiente = 1;
         }
-    
     }
 }

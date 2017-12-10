@@ -1,20 +1,10 @@
-﻿using System;
+﻿using Core;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Data;
-using System.Diagnostics;
-using Core;
 
 namespace IO.Frames.Transporte
 {
@@ -27,6 +17,7 @@ namespace IO.Frames.Transporte
         public int TotalDemandantes { get; set; }
         public DataTable MatrizCostosDT { get; set; }
         private dynamic UltimaCelda { get; set; }
+
         public MatrizTransporte(int ofertantes, int demandantes)
         {
             try
@@ -71,7 +62,6 @@ namespace IO.Frames.Transporte
                 if (MessageBox.Show("Error de ejecución. \n ¿Ver excepción?", "Error", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     MessageBox.Show(ex.Message, "Exception");
             }
-            
         }
 
         private void ReiniciarMatriz()
@@ -154,7 +144,6 @@ namespace IO.Frames.Transporte
 
                 // Se actuliza la informacion previa
                 //CargarDatosMatriz();
-
             }
             catch (Exception ex)
             {
@@ -183,7 +172,6 @@ namespace IO.Frames.Transporte
         private void DG_Matriz_CurrentCellChanged(object sender, EventArgs e) => ActualizarInformacionMatriz();
 
         private void Button_Click(object sender, RoutedEventArgs e) => ReiniciarMatriz();
-
 
         private double CalcularTotalDemanda()
         {
@@ -256,23 +244,22 @@ namespace IO.Frames.Transporte
                 if (Multas) throw new Exception("No implementado");
                 if (Bonos) throw new Exception("No implementado");
 
-
                 // Modelado del problema sin restricciones
-                // Funcion objetivo 
+                // Funcion objetivo
                 List<MiembroFuncionObjetivo> FuncionObjetivo = new List<MiembroFuncionObjetivo>();
 
                 // La cantidad de miembros de la funcion objetivo es igual la cantidad de ofertantes por la cantidad de demandantes.
                 FuncionObjetivo.Capacity = TotalDemandantes * TotalDemandantes;
 
                 // La funcion objetivo esta compuesta básicamente por los terminos en la matriz de costos.
-                for (int i = 0; i < TotalDemandantes ; ++i)
+                for (int i = 0; i < TotalDemandantes; ++i)
                 {
                     for (int j = 0; j < TotalOfertantes; ++j)
                     {
                         MiembroFuncionObjetivo miembro = new MiembroFuncionObjetivo();
                         miembro.Nombre = String.Format("Ofertante {0} -> Demandante {1}", i + 1, j + 1);
-                        miembro.Coeficiente = (double)MatrizCostosDT.Rows[j][i];  
-                        
+                        miembro.Coeficiente = (double)MatrizCostosDT.Rows[j][i];
+
                         FuncionObjetivo.Add(miembro);
                     }
                 }
@@ -312,7 +299,7 @@ namespace IO.Frames.Transporte
                     for (int j = 0; j < restriccionDemanda.Coeficientes.Capacity; ++j) restriccionDemanda.Coeficientes.Add(0D);
                     for (int j = 0; j < TotalOfertantes; ++j)
                         restriccionDemanda.Coeficientes[j + i * TotalOfertantes] = 1;
-                  
+
                     Restricciones.Add(restriccionDemanda);
                 }
 
@@ -329,7 +316,7 @@ namespace IO.Frames.Transporte
 
                     Restricciones.Add(restriccionDisponibilidad);
                 }
-               
+
                 // Se obtiene el tipo de modelo
                 int TipoModelo = (int)CB_TipoModelo.SelectedValue;
 

@@ -1,17 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace IO
 {
@@ -22,14 +10,13 @@ namespace IO
     {
         // Se instancian las ventanas como propiedades de la ventana para cachearlas y no perder los dato al cambiar entre ventana
         // Estas ventanas solo van a instanciarse al haber abierto por lo menos una vez la vista.
-        Frames.Inicio F_Inicio = new Frames.Inicio();
+        private Frames.Inicio F_Inicio = new Frames.Inicio();
 
-        Frames.Simplex.Inicio F_Simplex_Inicio;
-        Frames.Simplex.Modelo F_Simplex_Modelo;
+        private Frames.Simplex.Inicio F_Simplex_Inicio;
+        private Frames.Simplex.Modelo F_Simplex_Modelo;
 
-        Frames.Transporte.Inicio F_Transporte_Inicio;
-        Frames.Transporte.MatrizTransporte F_Transporte_MatrizTransporte;
-
+        private Frames.Transporte.Inicio F_Transporte_Inicio;
+        private Frames.Transporte.MatrizTransporte F_Transporte_MatrizTransporte;
 
         public MainWindow()
         {
@@ -38,7 +25,8 @@ namespace IO
         }
 
         #region Simplex
-        // Para abrir Simplex, primero se abre un popup para indicar el numero de variables y restricciones, cuando este se termine correctamente, 
+
+        // Para abrir Simplex, primero se abre un popup para indicar el numero de variables y restricciones, cuando este se termine correctamente,
         // se abrirá la ventana de modelado.
         private void B_Simplex_Click(object sender, RoutedEventArgs e)
         {
@@ -95,7 +83,7 @@ namespace IO
             }
         }
 
-        #endregion
+        #endregion Simplex
 
         private void B_Inicio_Click(object sender, RoutedEventArgs e)
         {
@@ -103,6 +91,7 @@ namespace IO
         }
 
         #region Transporte
+
         private void B_Transporte_Click(object sender, RoutedEventArgs e)
         {
             if (F_Transporte_Inicio != null && F_Transporte_Inicio.ShowActivated)
@@ -158,8 +147,7 @@ namespace IO
                 }
             }
         }
-        #endregion
 
-
+        #endregion Transporte
     }
 }

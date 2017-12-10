@@ -1,17 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Data;
+using System.Windows;
 
 namespace IO.Frames.Simplex
 {
@@ -26,8 +16,7 @@ namespace IO.Frames.Simplex
         public Core.Reporte ReporteModelo { get; set; }
         public DataTable VariablesDT { get; set; }
 
-
-        public Reporte(List<Core.MiembroFuncionObjetivo> FO, List<Core.Restriction> Rest, int Objetivo )
+        public Reporte(List<Core.MiembroFuncionObjetivo> FO, List<Core.Restriction> Rest, int Objetivo)
         {
             InitializeComponent();
 
@@ -45,12 +34,12 @@ namespace IO.Frames.Simplex
 
             // Variables
             DataTable VariablesDT = new DataTable();
-            VariablesDT.Columns.Add( new DataColumn(String.Format("Nombre"), typeof(string)) ); // 0
-            VariablesDT.Columns.Add( new DataColumn(String.Format("Valor"), typeof(double)) ); // 1
-            VariablesDT.Columns.Add( new DataColumn(String.Format("Coeficiente"), typeof(double)) ); // 2
-            VariablesDT.Columns.Add( new DataColumn(String.Format("Contribución"), typeof(double)) ); // 3
-            VariablesDT.Columns.Add( new DataColumn(String.Format("Minimo"), typeof(string)) ); // 4
-            VariablesDT.Columns.Add( new DataColumn(String.Format("Maximo"), typeof(string)) ); // 5
+            VariablesDT.Columns.Add(new DataColumn(String.Format("Nombre"), typeof(string))); // 0
+            VariablesDT.Columns.Add(new DataColumn(String.Format("Valor"), typeof(double))); // 1
+            VariablesDT.Columns.Add(new DataColumn(String.Format("Coeficiente"), typeof(double))); // 2
+            VariablesDT.Columns.Add(new DataColumn(String.Format("Contribución"), typeof(double))); // 3
+            VariablesDT.Columns.Add(new DataColumn(String.Format("Minimo"), typeof(string))); // 4
+            VariablesDT.Columns.Add(new DataColumn(String.Format("Maximo"), typeof(string))); // 5
 
             var Solucion = ReporteModelo.Solucion();
             var LimitesVariables = ReporteModelo.LimitesCoeficientesObjetivo();

@@ -9,13 +9,12 @@
     <Grid>
         <Grid Height="120" VerticalAlignment="Top" Background="#FF27AE60">
             <Button x:Name="B_Inicio"  Width="220" Height="40" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Inicio" FontSize="22" Background="#FF39BF72" BorderBrush="{x:Null}" Foreground="#FF34495E" Click="B_Inicio_Click" />
-            <Button x:Name="B_Simplex"  Width="220" Height="40" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Simplex" FontSize="22" Background="#FF39BF72" BorderBrush="{x:Null}" Foreground="#FF34495E" Margin="219,0,0,0" Click="B_Simplex_Click"/>
-            <Button x:Name="B_Transporte"  Width="220" Height="40" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Transporte" FontSize="22" Background="#FF39BF72" BorderBrush="{x:Null}" Foreground="#FF34495E" Margin="438,0,0,0" Click="B_Transporte_Click"/>
-            <Label Content="1.1" FontSize="10" FontStyle="Italic" Margin="0,61,80.6,0" VerticalAlignment="Top" Height="31" HorizontalAlignment="Right"/>
+            <Button x:Name="B_Simplex"  Width="220" Height="40" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Simplex" FontSize="22" Background="#FF39BF72" BorderBrush="{x:Null}" Foreground="#FF34495E" Margin="219,0,0,0" Click="B_Simplex_Click" />
+            <Button x:Name="B_Transporte"  Width="220" Height="40" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Transporte" FontSize="22" Background="#FF39BF72" BorderBrush="{x:Null}" Foreground="#FF34495E" Margin="438,0,0,0" Click="B_Transporte_Click" />
+            <Label Content="1.1" FontSize="10" FontStyle="Italic" Margin="0,61,80.6,0" VerticalAlignment="Top" Height="31" HorizontalAlignment="Right" />
         </Grid>
-        <Frame x:Name="F_Vista" Margin="0,120,0,0" NavigationUIVisibility="Hidden"/>
-        <Label Content="IO Solver" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="48" FontStyle="Italic" Margin="0,20,89.6,0"/>
-        <Label Content="Universidad Privada de Santa Cruz de la Sierra " VerticalAlignment="Top" FontSize="10" FontStyle="Italic" HorizontalAlignment="Right" Margin="0,75,38.6,0"/>
-
+        <Frame x:Name="F_Vista" Margin="0,120,0,0" NavigationUIVisibility="Hidden" />
+        <Label Content="IO Solver" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="48" FontStyle="Italic" Margin="0,20,89.6,0" />
+        <Label Content="Universidad Privada de Santa Cruz de la Sierra " VerticalAlignment="Top" FontSize="10" FontStyle="Italic" HorizontalAlignment="Right" Margin="0,75,38.6,0" />
     </Grid>
 </Window>

@@ -1,17 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Data;
+using System.Linq;
+using System.Windows;
 
 namespace IO.Frames.Transporte
 {
@@ -118,12 +109,11 @@ namespace IO.Frames.Transporte
             DT_Solucion.DataContext = SolucionOptimaDT;
 
             // Labels
-            double recursosUsados = Solucion.Sum( x => x.ToDouble()), demandaTotal = Demanda.Sum(), ofertaTotal = Oferta.Sum();
+            double recursosUsados = Solucion.Sum(x => x.ToDouble()), demandaTotal = Demanda.Sum(), ofertaTotal = Oferta.Sum();
 
             L_ValorObjetivo.Content += " " + ReporteModelo.ObtenerZ().ToString();
             L_Disponibilidad.Content += (ofertaTotal - recursosUsados).ToString();
             L_Requerimiento.Content += (demandaTotal - recursosUsados).ToString();
-
         }
 
         private void B_Salir_Click(object sender, RoutedEventArgs e)
