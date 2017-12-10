@@ -259,7 +259,7 @@ namespace IO.Frames.Transporte
 
                 // Modelado del problema sin restricciones
                 // Funcion objetivo 
-                List<MiembroFo> FuncionObjetivo = new List<MiembroFo>();
+                List<MiembroFuncionObjetivo> FuncionObjetivo = new List<MiembroFuncionObjetivo>();
 
                 // La cantidad de miembros de la funcion objetivo es igual la cantidad de ofertantes por la cantidad de demandantes.
                 FuncionObjetivo.Capacity = TotalDemandantes * TotalDemandantes;
@@ -269,9 +269,9 @@ namespace IO.Frames.Transporte
                 {
                     for (int j = 0; j < TotalOfertantes; ++j)
                     {
-                        MiembroFo miembro = new MiembroFo();
-                        miembro.Name = String.Format("Ofertante {0} -> Demandante {1}", i + 1, j + 1);
-                        miembro.Coef = (double)MatrizCostosDT.Rows[j][i];  
+                        MiembroFuncionObjetivo miembro = new MiembroFuncionObjetivo();
+                        miembro.Nombre = String.Format("Ofertante {0} -> Demandante {1}", i + 1, j + 1);
+                        miembro.Coeficiente = (double)MatrizCostosDT.Rows[j][i];  
                         
                         FuncionObjetivo.Add(miembro);
                     }
@@ -284,16 +284,16 @@ namespace IO.Frames.Transporte
                 for (int i = 0; i < TotalOfertantes; ++i)
                 {
                     Restriction restriccionOferta = new Restriction();
-                    restriccionOferta.Bside = CalcularOferta(i);
-                    restriccionOferta.Name = String.Format("Ofertante {0}", i + 1);
-                    restriccionOferta._sign = Signo.MenorIgualQue;
+                    restriccionOferta.LadoB = CalcularOferta(i);
+                    restriccionOferta.Nombre = String.Format("Ofertante {0}", i + 1);
+                    restriccionOferta.Signo = Signo.MenorIgualQue;
 
                     // Coeficientes de la restricción
                     // Deben tener 1 los coeficientes que le corresponde a la oferta 'i' y 0 los que no
-                    restriccionOferta.Coef.Capacity = TotalDemandantes * TotalOfertantes;
-                    for (int j = 0; j < restriccionOferta.Coef.Capacity; ++j) restriccionOferta.Coef.Add(0D);
+                    restriccionOferta.Coeficientes.Capacity = TotalDemandantes * TotalOfertantes;
+                    for (int j = 0; j < restriccionOferta.Coeficientes.Capacity; ++j) restriccionOferta.Coeficientes.Add(0D);
                     for (int j = 0; j < TotalDemandantes; ++j)
-                        restriccionOferta.Coef[j * TotalOfertantes + i] = 1;
+                        restriccionOferta.Coeficientes[j * TotalOfertantes + i] = 1;
 
                     Restricciones.Add(restriccionOferta);
                 }
@@ -302,16 +302,16 @@ namespace IO.Frames.Transporte
                 for (int i = 0; i < TotalDemandantes; ++i)
                 {
                     Restriction restriccionDemanda = new Restriction();
-                    restriccionDemanda.Bside = CalcularDemanda(i);
-                    restriccionDemanda.Name = String.Format("Demandante {0}", i + 1);
-                    restriccionDemanda._sign = Signo.MenorIgualQue;
+                    restriccionDemanda.LadoB = CalcularDemanda(i);
+                    restriccionDemanda.Nombre = String.Format("Demandante {0}", i + 1);
+                    restriccionDemanda.Signo = Signo.MenorIgualQue;
 
                     // Coeficientes de la restricción
                     // Deben tener 1 los coeficientes que le corresponde a la demanda 'i' y 0 los que no
-                    restriccionDemanda.Coef.Capacity = TotalDemandantes * TotalOfertantes;
-                    for (int j = 0; j < restriccionDemanda.Coef.Capacity; ++j) restriccionDemanda.Coef.Add(0D);
+                    restriccionDemanda.Coeficientes.Capacity = TotalDemandantes * TotalOfertantes;
+                    for (int j = 0; j < restriccionDemanda.Coeficientes.Capacity; ++j) restriccionDemanda.Coeficientes.Add(0D);
                     for (int j = 0; j < TotalOfertantes; ++j)
-                        restriccionDemanda.Coef[j + i * TotalOfertantes] = 1;
+                        restriccionDemanda.Coeficientes[j + i * TotalOfertantes] = 1;
                   
                     Restricciones.Add(restriccionDemanda);
                 }
@@ -321,11 +321,11 @@ namespace IO.Frames.Transporte
                     double demandaTotal = CalcularTotalDemanda(), ofertaTotal = CalcularTotalOferta();
                     Restriction restriccionDisponibilidad = new Restriction();
 
-                    restriccionDisponibilidad.Name = "Disponibilidad Oferta/Demanda";
-                    restriccionDisponibilidad.Bside = (demandaTotal < ofertaTotal) ? demandaTotal : ofertaTotal;
-                    restriccionDisponibilidad._sign = Signo.Igual;
-                    restriccionDisponibilidad.Coef.Capacity = TotalDemandantes * TotalOfertantes;
-                    for (int j = 0; j < restriccionDisponibilidad.Coef.Capacity; ++j) restriccionDisponibilidad.Coef.Add(1D);
+                    restriccionDisponibilidad.Nombre = "Disponibilidad Oferta/Demanda";
+                    restriccionDisponibilidad.LadoB = (demandaTotal < ofertaTotal) ? demandaTotal : ofertaTotal;
+                    restriccionDisponibilidad.Signo = Signo.Igual;
+                    restriccionDisponibilidad.Coeficientes.Capacity = TotalDemandantes * TotalOfertantes;
+                    for (int j = 0; j < restriccionDisponibilidad.Coeficientes.Capacity; ++j) restriccionDisponibilidad.Coeficientes.Add(1D);
 
                     Restricciones.Add(restriccionDisponibilidad);
                 }

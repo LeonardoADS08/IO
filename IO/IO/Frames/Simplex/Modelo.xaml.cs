@@ -22,7 +22,7 @@ namespace IO.Frames.Simplex
     /// </summary>
     public partial class Modelo : Page
     {
-        public ObservableCollection<Core.MiembroFo> ListFO { get; set; }
+        public ObservableCollection<Core.MiembroFuncionObjetivo> ListFO { get; set; }
         public List<Core.Restriction> ListRest { get; set; }
         public DataTable RestriccionesDT { get; set; }
 
@@ -38,7 +38,7 @@ namespace IO.Frames.Simplex
                 totalRestricciones = restricciones;
 
                 // Se instancian los objetos que van a guardar los datos
-                ListFO = new ObservableCollection<Core.MiembroFo>();
+                ListFO = new ObservableCollection<Core.MiembroFuncionObjetivo>();
                 ListRest = new List<Core.Restriction>();
                 RestriccionesDT = new DataTable();
 
@@ -84,12 +84,12 @@ namespace IO.Frames.Simplex
 
         private void B_ValoresDefecto_Click(object sender, RoutedEventArgs e)
         {
-            ListFO = new ObservableCollection<Core.MiembroFo>();
-            Core.MiembroFo defecto = new Core.MiembroFo();
+            ListFO = new ObservableCollection<Core.MiembroFuncionObjetivo>();
+            Core.MiembroFuncionObjetivo defecto = new Core.MiembroFuncionObjetivo();
             for (int i = 0; i < totalVariables; ++i)
             {
-                defecto = new Core.MiembroFo();
-                defecto.Name = "Variable " + (i + 1).ToString();
+                defecto = new Core.MiembroFuncionObjetivo();
+                defecto.Nombre = "Variable " + (i + 1).ToString();
                 ListFO.Add(defecto);
             }
             DG_FO.ItemsSource = ListFO;
@@ -97,12 +97,12 @@ namespace IO.Frames.Simplex
 
         private void B_Reestablecer_Click(object sender, RoutedEventArgs e)
         {
-            ListFO = new ObservableCollection<Core.MiembroFo>();
+            ListFO = new ObservableCollection<Core.MiembroFuncionObjetivo>();
 
             DG_FO.ItemsSource = ListFO;
 
             for (int i = 0; i < totalVariables; ++i)
-                ListFO.Add(new Core.MiembroFo());
+                ListFO.Add(new Core.MiembroFuncionObjetivo());
         }
 
         private void DG_FO_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
@@ -217,17 +217,17 @@ namespace IO.Frames.Simplex
                 for (int i = 0; i < totalRestricciones; ++i)
                 {
                     ListRest.Add(new Core.Restriction());
-                    ListRest[i].Name = (string)RestriccionesDT.Rows[i][0];
-                    ListRest[i].Bside = (double)RestriccionesDT.Rows[i][totalVariables + 2];
+                    ListRest[i].Nombre = (string)RestriccionesDT.Rows[i][0];
+                    ListRest[i].LadoB = (double)RestriccionesDT.Rows[i][totalVariables + 2];
                     // Verificando que no falte un signo
                     if ((string)RestriccionesDT.Rows[i][totalVariables + 1] == "")
                     {
                         MessageBox.Show("Falta indicar un signo en una restricción.", "Error", MessageBoxButton.OK);
                         return;
                     }
-                    ListRest[i]._sign = Core.Signos.SignosDictionary[(string)RestriccionesDT.Rows[i][totalVariables + 1]];
+                    ListRest[i].Signo = Core.Signos.SignosDictionary[(string)RestriccionesDT.Rows[i][totalVariables + 1]];
                     for (int j = 1; j <= totalVariables; ++j)
-                        ListRest[i].Coef.Add((double)RestriccionesDT.Rows[i][j]);
+                        ListRest[i].Coeficientes.Add((double)RestriccionesDT.Rows[i][j]);
 
                 }
 
@@ -236,7 +236,7 @@ namespace IO.Frames.Simplex
                 // Nombres
                 foreach (var val in ListFO)
                 {
-                    if (val.Name == "")
+                    if (val.Nombre == "")
                     {
                         MessageBox.Show("Falta nombrar una variable.", "Error", MessageBoxButton.OK);
                         return;
@@ -247,7 +247,7 @@ namespace IO.Frames.Simplex
                 // Verificando que no falte un nombre
                 foreach (var val in ListRest)
                 {
-                    if (val.Name == "")
+                    if (val.Nombre == "")
                     {
                         MessageBox.Show("Falta nombrar una restricción.", "Error", MessageBoxButton.OK);
                         return;
@@ -288,8 +288,8 @@ namespace IO.Frames.Simplex
             ListFO.Clear();
             for (int i = 0; i < totalVariables; ++i)
             {
-                ListFO.Add(new Core.MiembroFo());
-                ListFO[i].Name = "";
+                ListFO.Add(new Core.MiembroFuncionObjetivo());
+                ListFO[i].Nombre = "";
             }
         }
     }

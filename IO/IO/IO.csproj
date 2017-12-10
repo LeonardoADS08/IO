@@ -112,7 +112,6 @@
     <Compile Include="Frames\Simplex\Reporte.xaml.cs">
       <DependentUpon>Reporte.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Frames\Simplex\Signos.cs" />
     <Compile Include="Frames\Transporte\Inicio.xaml.cs">
       <DependentUpon>Inicio.xaml</DependentUpon>
     </Compile>
@@ -154,9 +153,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Cubo.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{0ee4cba0-811e-4454-a2d5-92fac35f43c2}</Project>
       <Name>Core</Name>
@@ -165,9 +161,6 @@
       <Project>{c9d16dc6-e9ac-43c3-a95e-61a9a86db3dc}</Project>
       <Name>Utils</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Image1.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -8,29 +8,23 @@ namespace Core
 {
     public class Restriction
     {
-        private double _bside;
-        List<double> _coef;
-        private string _name;
-        public int _value;//sera la suma dle b con la de olgura u exedente
+        private double _ladoB;
+        private List<double> _coeficientes;
+        private string _nombre;
+        private Signo signo;
+        public int HolguraExcedente; //sera la suma dle b con la de olgura u exedente
 
-        public double Bside { get => _bside; set => _bside = value; }
-        public List<double> Coef { get => _coef; set => _coef = value; }
-
-        public string Name
-        {
-            get => _name;
-            set => _name = value;
-        }
-
-        public Signo _sign;
+        public double LadoB { get => _ladoB; set => _ladoB = value; }
+        public List<double> Coeficientes { get => _coeficientes; set => _coeficientes = value; }
+        public string Nombre { get => _nombre; set => _nombre = value; }
+        public Signo Signo { get => signo; set => signo = value; }
 
         public Restriction()
         {
-            Coef = new List<double>();
-            _bside = 0;
-            _coef = new List<double>();
-            _name = "";
-            _value = 0;
+            _ladoB = 0;
+            _coeficientes = new List<double>();
+            _nombre = "";
+            HolguraExcedente = 0;
         }
     }
 }

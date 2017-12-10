@@ -13,9 +13,9 @@ namespace Core
     {
         public int _z;
 
-        private List<MiembroFo> _fo;
+        private List<MiembroFuncionObjetivo> _fo;
 
-        public List<MiembroFo> FO { get => _fo; set => _fo = value; }
+        public List<MiembroFuncionObjetivo> FO { get => _fo; set => _fo = value; }
         public List<Restriction> Res { get => _res; set => _res = value; }
         public SimplexSolver Solver { get => _solver; set => _solver = value; }
         public int Z { get => _z; set => _z = value; }
@@ -23,18 +23,18 @@ namespace Core
         private SimplexSolver _solver;
         private List<Restriction> _res;
 
-        public Simplex(List<MiembroFo> x, int Objective)
+        public Simplex(List<MiembroFuncionObjetivo> x, int Objective)
         {
-            FO = new List<MiembroFo>();
+            FO = new List<MiembroFuncionObjetivo>();
             int i;
             FO = x;
             Solver = new SimplexSolver();
             Solver.AddRow("Z", out _z);//declara la existencia de la funcion objetivo
             for (i = 0; i < FO.Count; i++)
             {
-                Solver.AddVariable(FO[i].Name, out FO[i]._value);//asigna donde se guardaran los resultados;
-                Solver.SetBounds(FO[i]._value, 0, Rational.PositiveInfinity);//asigna los limites de las variables
-                Solver.SetCoefficient(_z, FO[i]._value, FO[i].Coef);//asigna los coef de las variables en la func ob
+                Solver.AddVariable(FO[i].Nombre, out FO[i]._valor);//asigna donde se guardaran los resultados;
+                Solver.SetBounds(FO[i]._valor, 0, Rational.PositiveInfinity);//asigna los limites de las variables
+                Solver.SetCoefficient(_z, FO[i]._valor, FO[i].Coeficiente);//asigna los coef de las variables en la func ob
 
             }
             bool aux = false;
@@ -56,30 +56,30 @@ namespace Core
             Res = x;
             foreach (Restriction t in Res)
             {
-                Solver.AddRow(t.Name, out t._value);
-                for (int j = 0; j < t.Coef.Count; j++)
+                Solver.AddRow(t.Nombre, out t.HolguraExcedente);
+                for (int j = 0; j < t.Coeficientes.Count; j++)
                 {
-                    Solver.SetCoefficient(t._value, FO[j]._value, t.Coef[j]);// asigna a la variable correspondiente en la restriccion un coeficiente
+                    Solver.SetCoefficient(t.HolguraExcedente, FO[j]._valor, t.Coeficientes[j]);// asigna a la variable correspondiente en la restriccion un coeficiente
                 }
 
-                if (t._sign == Signo.Igual)
+                if (t.Signo == Signo.Igual)
                 {
-                    Solver.SetBounds(t._value, t.Bside, t.Bside);
+                    Solver.SetBounds(t.HolguraExcedente, t.LadoB, t.LadoB);
                 }
-                else if (t._sign == Signo.MayorIgualQue)
+                else if (t.Signo == Signo.MayorIgualQue)
                 {
-                    Solver.SetBounds(t._value, t.Bside, Rational.PositiveInfinity);
+                    Solver.SetBounds(t.HolguraExcedente, t.LadoB, Rational.PositiveInfinity);
                 }
-                else if (t._sign == Signo.MayorQue)
+                else if (t.Signo == Signo.MayorQue)
                 {
-                    Solver.SetBounds(t._value, t.Bside + 0.1, Rational.PositiveInfinity);
+                    Solver.SetBounds(t.HolguraExcedente, t.LadoB + 0.1, Rational.PositiveInfinity);
                 }
-                else if (t._sign == Signo.MenorIgualQue)
+                else if (t.Signo == Signo.MenorIgualQue)
                 {
-                    Solver.SetBounds(t._value, Rational.NegativeInfinity, t.Bside);
+                    Solver.SetBounds(t.HolguraExcedente, Rational.NegativeInfinity, t.LadoB);
                 }
-                else if (t._sign == Signo.MenorQue)
-                { Solver.SetBounds(t._value, Rational.NegativeInfinity, t.Bside - 0.1); }
+                else if (t.Signo == Signo.MenorQue)
+                { Solver.SetBounds(t.HolguraExcedente, Rational.NegativeInfinity, t.LadoB - 0.1); }
             }
         }
 

@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constantes.cs" />
-    <Compile Include="MiembroFo.cs" />
+    <Compile Include="MiembroFuncionObjetivo.cs" />
     <Compile Include="Reporte.cs" />
     <Compile Include="Restriction.cs" />
     <Compile Include="Simplex.cs" />

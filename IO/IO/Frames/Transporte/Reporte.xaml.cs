@@ -20,7 +20,7 @@ namespace IO.Frames.Transporte
     /// </summary>
     public partial class Reporte : Window
     {
-        public List<Core.MiembroFo> FuncionObjetivo { get; set; }
+        public List<Core.MiembroFuncionObjetivo> FuncionObjetivo { get; set; }
         public List<Core.Restriction> Restricciones { get; set; }
         public Core.Simplex Simplex { get; set; }
         public Core.Reporte ReporteModelo { get; set; }
@@ -32,7 +32,7 @@ namespace IO.Frames.Transporte
         public List<double> Demanda { get; set; }
         public List<double> Oferta { get; set; }
 
-        public Reporte(List<Core.MiembroFo> FO, List<Core.Restriction> Rest, int Objetivo, int totalOfertantes, int totalDemandantes, List<double> demandas, List<double> ofertas)
+        public Reporte(List<Core.MiembroFuncionObjetivo> FO, List<Core.Restriction> Rest, int Objetivo, int totalOfertantes, int totalDemandantes, List<double> demandas, List<double> ofertas)
         {
             InitializeComponent();
 
@@ -59,10 +59,10 @@ namespace IO.Frames.Transporte
             for (int i = 0; i < FuncionObjetivo.Count; ++i)
             {
                 DataRow newRow = SolucionOptimaDT.NewRow();
-                newRow[0] = FuncionObjetivo[i].Name;
+                newRow[0] = FuncionObjetivo[i].Nombre;
                 newRow[1] = Solucion[i].ToDouble();
-                newRow[2] = FuncionObjetivo[i].Coef;
-                newRow[3] = FuncionObjetivo[i].Coef * Solucion[i].ToDouble();
+                newRow[2] = FuncionObjetivo[i].Coeficiente;
+                newRow[3] = FuncionObjetivo[i].Coeficiente * Solucion[i].ToDouble();
 
                 SolucionOptimaDT.Rows.Add(newRow);
             }
