@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:IO.Frames.Simplex"
       mc:Ignorable="d" Background="#ecf0f1"
-      Title="Inicio" HorizontalAlignment="Left" VerticalAlignment="Top" Height="256" Width="269.867" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+      Title="Simplex" HorizontalAlignment="Left" VerticalAlignment="Top" Height="256" Width="269.867" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 
     <Grid>
         <Label x:Name="L_Variables" Content="Cantidad de variables" Margin="10,49,0,0" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="243" Height="26" VerticalAlignment="Top"/>

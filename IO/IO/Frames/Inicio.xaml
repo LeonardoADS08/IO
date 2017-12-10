@@ -12,12 +12,14 @@
         <Label Content="IO Solver" FontSize="48" FontStyle="Italic" Margin="39,32,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Label Content="Universidad Privada de Santa Cruz de la Sierra " FontSize="10" FontStyle="Italic" Margin="81,90,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-        <Label Content="¿Qué es IO Solver?" HorizontalAlignment="Left" Margin="104,138,0,0" VerticalAlignment="Top" FontSize="36" FontStyle="Italic" Width="300"/>
-        <TextBlock HorizontalAlignment="Left" Margin="171,201,0,0" TextWrapping="Wrap" Text="IO Solver es una herramienta para resolver problemas de programación lineal con Simplex." VerticalAlignment="Top" FontSize="24" Height="49" Width="987"/>
-        <Label Content="¿Donde puedo obtener IO Solver?" HorizontalAlignment="Left" Margin="104,246,0,0" VerticalAlignment="Top" FontSize="36" FontStyle="Italic" Width="667"/>
-        <TextBlock HorizontalAlignment="Left" Margin="171,310,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" Height="103" Width="987"><Run Text="IO Solver es gratis y de código abierto "/><Run FontStyle="Italic" FontSize="18" Text="(Bajo GNU General Public License v2.0)"/><Run Text=", se puede encontrar "/><Run Text="el código fuente "/><Run Text="en: "/><Run FontWeight="Bold" Text="Git"/><Run FontWeight="Bold" Text="H"/><Run FontWeight="Bold" Text="ub.com/LeonardoADS08/IO"/></TextBlock>
-        <Label Content="Desarrolladores" HorizontalAlignment="Left" Margin="104,390,0,0" VerticalAlignment="Top" FontSize="36" FontStyle="Italic" Width="290"/>
-        <TextBlock HorizontalAlignment="Left" Margin="171,448,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" Height="103" Width="351"><Run Text="Diego Llanos Gareca"/><LineBreak/><Run Text="Leonardo Arteaga dos Santos"/><LineBreak/><Run Text="Stephany Diaz Justiniano"/></TextBlock>
+        <Label Content="¿Qué es IO Solver?" HorizontalAlignment="Left" Margin="104,122,0,0" VerticalAlignment="Top" FontSize="36" FontStyle="Italic" Width="300"/>
+        <TextBlock HorizontalAlignment="Left" Margin="171,178,0,0" TextWrapping="Wrap" Text="IO Solver es una herramienta para resolver problemas de programación lineal con Simplex." VerticalAlignment="Top" FontSize="24" Height="49" Width="987"/>
+        <Label Content="¿Donde puedo obtener IO Solver?" HorizontalAlignment="Left" Margin="104,215,0,0" VerticalAlignment="Top" FontSize="36" FontStyle="Italic" Width="667"/>
+        <TextBlock HorizontalAlignment="Left" Margin="171,271,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" Height="69" Width="987"><Run Text="IO Solver es gratis y de código abierto "/><Run FontStyle="Italic" FontSize="18" Text="(Bajo GNU General Public License v2.0)"/><Run Text=", se puede encontrar "/><Run Text="el código fuente "/><Run Text="en: "/><Run FontWeight="Bold" Text="Git"/><Run FontWeight="Bold" Text="H"/><Run FontWeight="Bold" Text="ub.com/LeonardoADS08/IO"/></TextBlock>
+        <Label Content="Desarrolladores" HorizontalAlignment="Left" Margin="104,402,0,0" VerticalAlignment="Top" FontSize="36" FontStyle="Italic" Width="290"/>
+        <TextBlock HorizontalAlignment="Left" Margin="171,460,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24" Height="103" Width="351"><Run Text="Diego Llanos Gareca"/><LineBreak/><Run Text="Leonardo Arteaga dos Santos"/><LineBreak/><Run Text="Stephany Diaz Justiniano"/></TextBlock>
         <GroupBox Header="Información del proyecto" Margin="15" d:IsLocked="True" />
+        <Label Content="Docente: Ing. Montoya Paz Peggi Hanelowre" HorizontalAlignment="Left" Margin="104,344,0,0" VerticalAlignment="Top" FontSize="36" FontStyle="Italic" Width="1119"/>
+        <Label Content="1.1" FontSize="10" FontStyle="Italic" Margin="219,73,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
     </Grid>
 </Page>

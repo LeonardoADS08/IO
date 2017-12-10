@@ -77,6 +77,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Frames\Transporte\Inicio.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Frames\Transporte\MatrizTransporte.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Frames\Transporte\Reporte.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -101,6 +113,15 @@
       <DependentUpon>Reporte.xaml</DependentUpon>
     </Compile>
     <Compile Include="Frames\Simplex\Signos.cs" />
+    <Compile Include="Frames\Transporte\Inicio.xaml.cs">
+      <DependentUpon>Inicio.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Frames\Transporte\MatrizTransporte.xaml.cs">
+      <DependentUpon>MatrizTransporte.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Frames\Transporte\Reporte.xaml.cs">
+      <DependentUpon>Reporte.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -148,5 +169,6 @@
   <ItemGroup>
     <Resource Include="Image1.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

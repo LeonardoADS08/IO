@@ -27,6 +27,10 @@ namespace Core
         public Restriction()
         {
             Coef = new List<double>();
+            _bside = 0;
+            _coef = new List<double>();
+            _name = "";
+            _value = 0;
         }
     }
 }

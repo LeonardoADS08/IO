@@ -23,9 +23,13 @@ namespace IO
         // Se instancian las ventanas como propiedades de la ventana para cachearlas y no perder los dato al cambiar entre ventana
         // Estas ventanas solo van a instanciarse al haber abierto por lo menos una vez la vista.
         Frames.Inicio F_Inicio = new Frames.Inicio();
+
         Frames.Simplex.Inicio F_Simplex_Inicio;
         Frames.Simplex.Modelo F_Simplex_Modelo;
-        Frames.Grafico F_Grafico;
+
+        Frames.Transporte.Inicio F_Transporte_Inicio;
+        Frames.Transporte.MatrizTransporte F_Transporte_MatrizTransporte;
+
 
         public MainWindow()
         {
@@ -89,8 +93,6 @@ namespace IO
                     return;
                 }
             }
-            
-            
         }
 
         #endregion
@@ -100,15 +102,64 @@ namespace IO
             F_Vista.Content = F_Inicio;
         }
 
-        private void B_Grafico_Click(object sender, RoutedEventArgs e)
+        #region Transporte
+        private void B_Transporte_Click(object sender, RoutedEventArgs e)
         {
-            if (F_Simplex_Inicio == null) F_Grafico = new Frames.Grafico();
-            F_Vista.Content = F_Grafico;
+            if (F_Transporte_Inicio != null && F_Transporte_Inicio.ShowActivated)
+            {
+                F_Transporte_Inicio.Activate();
+                return;
+            }
+            F_Transporte_Inicio = new Frames.Transporte.Inicio();
+            F_Transporte_Inicio.Show();
+            F_Transporte_Inicio.Closed += new EventHandler(CargarTransporte);
         }
 
-        private void F_Vista_Navigated(object sender, NavigationEventArgs e)
+        private void CargarTransporte(object sender, EventArgs e)
         {
+            if (!F_Transporte_Inicio.Estado)
+            {
+                F_Transporte_Inicio = null;
+                return;
+            }
 
+            if (F_Transporte_MatrizTransporte == null)
+            {
+                F_Transporte_MatrizTransporte = new Frames.Transporte.MatrizTransporte(F_Transporte_Inicio.Ofertantes, F_Transporte_Inicio.Demandantes);
+                F_Vista.Content = F_Transporte_MatrizTransporte;
+                F_Transporte_Inicio = null;
+                return;
+            }
+
+            if (F_Transporte_Inicio.Estado)
+            {
+                MessageBoxResult result = MessageBox.Show("Ya existe una matriz de costos creada, ¿Desea recuperarla?",
+                                                        "Esperando confirmación",
+                                                        MessageBoxButton.YesNoCancel,
+                                                        MessageBoxImage.Information,
+                                                        MessageBoxResult.Yes);
+                if (result == MessageBoxResult.Yes)
+                {
+                    F_Vista.Content = F_Transporte_MatrizTransporte;
+                    F_Transporte_Inicio = null;
+                    return;
+                }
+                else if (result == MessageBoxResult.No)
+                {
+                    F_Transporte_MatrizTransporte = new Frames.Transporte.MatrizTransporte(F_Transporte_Inicio.Ofertantes, F_Transporte_Inicio.Demandantes);
+                    F_Vista.Content = F_Transporte_MatrizTransporte;
+                    F_Transporte_Inicio = null;
+                    return;
+                }
+                else
+                {
+                    F_Transporte_Inicio = null;
+                    return;
+                }
+            }
         }
+        #endregion
+
+
     }
 }
