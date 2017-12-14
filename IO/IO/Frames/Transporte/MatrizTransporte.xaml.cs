@@ -257,7 +257,7 @@ namespace IO.Frames.Transporte
                     for (int j = 0; j < TotalOfertantes; ++j)
                     {
                         MiembroFuncionObjetivo miembro = new MiembroFuncionObjetivo();
-                        miembro.Nombre = String.Format("Ofertante {0} -> Demandante {1}", i + 1, j + 1);
+                        miembro.Nombre = String.Format("Ofertante {0} -> Demandante {1}", j + 1, i + 1);
                         miembro.Coeficiente = (double)MatrizCostosDT.Rows[j][i];
 
                         FuncionObjetivo.Add(miembro);
@@ -326,7 +326,7 @@ namespace IO.Frames.Transporte
                     Demandas.Add(CalcularDemanda(i));
 
                 List<double> Ofertas = new List<double>();
-                for (int i = 0; i < TotalDemandantes; ++i)
+                for (int i = 0; i < TotalOfertantes; ++i)
                     Ofertas.Add(CalcularOferta(i));
 
                 Transporte.Reporte Reporte = new Transporte.Reporte(FuncionObjetivo, Restricciones, TipoModelo, TotalOfertantes, TotalDemandantes, Demandas, Ofertas);
