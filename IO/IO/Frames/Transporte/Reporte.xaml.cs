@@ -27,6 +27,9 @@ namespace IO.Frames.Transporte
         {
             InitializeComponent();
 
+            Frames.Simplex.Reporte rep = new Frames.Simplex.Reporte(FO, Rest, Objetivo);
+            rep.Show();
+
             FuncionObjetivo = FO;
             Restricciones = Rest;
             TotalOfertantes = totalOfertantes;
@@ -114,6 +117,43 @@ namespace IO.Frames.Transporte
             L_ValorObjetivo.Content += " " + ReporteModelo.ObtenerZ().ToString();
             L_Disponibilidad.Content += (ofertaTotal - recursosUsados).ToString();
             L_Requerimiento.Content += (demandaTotal - recursosUsados).ToString();
+
+            // Ficticios, que son básicamente las variables de holgura/excedente.
+            // Las cantidad de pende de la demanda y oferta total, el que tenga menos será al que le toque ser ficticio.
+            if (ofertaTotal != demandaTotal)
+            {
+                var HolguraExcedente = ReporteModelo.HolguraExcedente();
+                // HolgutaExcedente: 1.- Oferta || 2.- Demanda || 3.- Requisitos
+                if (ofertaTotal > demandaTotal)
+                {
+                    for (int i = 0; i < totalOfertantes; ++i)
+                    {
+                        DataRow newRow = SolucionOptimaDT.NewRow();
+                        newRow[0] = String.Format("Demandante Ficticio -> Ofertante {0}", (i + 1));
+                        newRow[1] = Math.Abs(HolguraExcedente[i]);
+                        newRow[2] = 0;
+                        newRow[3] = 0;
+
+                        SolucionOptimaDT.Rows.Add(newRow);
+                    }
+                }
+                else if (demandaTotal > ofertaTotal)
+                {
+                    for (int i = 0; i < totalDemandantes; ++i)
+                    {
+                        DataRow newRow = SolucionOptimaDT.NewRow();
+                        newRow[0] = String.Format("Ofertante Ficticio -> Demandante {0}", (i + 1));
+                        newRow[1] = Math.Abs(HolguraExcedente[totalOfertantes + i]);
+                        newRow[2] = 0;
+                        newRow[3] = 0;
+
+                        SolucionOptimaDT.Rows.Add(newRow);
+                    }
+                }
+            }
+            
+
+            
         }
 
         private void B_Salir_Click(object sender, RoutedEventArgs e)
