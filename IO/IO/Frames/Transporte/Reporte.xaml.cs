@@ -27,9 +27,6 @@ namespace IO.Frames.Transporte
         {
             InitializeComponent();
 
-            Frames.Simplex.Reporte rep = new Frames.Simplex.Reporte(FO, Rest, Objetivo);
-            rep.Show();
-
             FuncionObjetivo = FO;
             Restricciones = Rest;
             TotalOfertantes = totalOfertantes;
